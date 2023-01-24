@@ -10,7 +10,6 @@ use App\Mail\Web\AtendimentoRetorno;
 use Illuminate\Support\Facades\Storage;
 
 use App\Models\{
-    Apartamento,
     Post,
     CatPost,
     Cidades,
@@ -49,12 +48,6 @@ class WebController extends Controller
 
     public function home()
     {
-        $acomodacoes = Apartamento::available()->get();
-        $apartamentos = Apartamento::available()
-                    ->where('exibir_home', 1)
-                    ->inRandomOrder()
-                    ->limit(6)
-                    ->get();
         $artigos = Post::orderBy('created_at', 'DESC')->where('tipo', 'artigo')
                     ->postson()
                     ->limit(6)
@@ -74,9 +67,7 @@ class WebController extends Controller
 		return view('web.'.$this->configService->getConfig()->template.'.home',[
             'head' => $head,            
             'slides' => $slides,
-            'apartamentos' => $apartamentos,
             'artigos' => $artigos,
-            'acomodacoes' => $acomodacoes,
             'galerias' => $galerias
 		]);
     }

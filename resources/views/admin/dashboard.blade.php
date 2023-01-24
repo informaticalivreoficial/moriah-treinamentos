@@ -32,13 +32,13 @@
     </div>
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
         <div class="info-box">
-            <span class="info-box-icon bg-info"><a href="{{ route('apartamentos.index') }}" title="Apartamentos"><i class="fa far fa-building"></i></a></span>
+            <span class="info-box-icon bg-info"><a href="{{-- route('apartamentos.index') --}}" title="Apartamentos"><i class="fa far fa-building"></i></a></span>
 
             <div class="info-box-content">
                 <span class="info-box-text"><b>Apartamentos</b></span>
-                <span class="info-box-text">Publicado: {{ $apartamentosAvailable }}</span>
-                <span class="info-box-text">Rascunho: {{ $apartamentosUnavailable }}</span>
-                <span class="info-box-text">Total: {{ $apartamentosAvailable + $apartamentosUnavailable }}</span>
+                <span class="info-box-text">Publicado: {{-- $apartamentosAvailable --}}</span>
+                <span class="info-box-text">Rascunho: {{-- $apartamentosUnavailable --}}</span>
+                <span class="info-box-text">Total: {{-- $apartamentosAvailable + $apartamentosUnavailable --}}</span>
             </div>            
         </div>
     </div>
