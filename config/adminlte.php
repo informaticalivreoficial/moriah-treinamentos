@@ -247,40 +247,14 @@ return [
             'url'  => 'admin/menus',
             'icon' => 'fas fa-bars',
         ],
-        [
-            'text' => 'Apartamentos',            
-            'icon' => 'fas fa-building',
-            'submenu' => [
-                [
-                    'text' => 'Listar Todos',
-                    'url'  => 'admin/apartamentos',
-                ],
-                [
-                    'text' => 'Criar Novo',
-                    'url'  => 'admin/apartamentos/create',
-                ]
-            ]
-        ],
-        [
-            'text' => 'Reservas',            
-            'icon' => 'fas fa-store',
-            'submenu' => [
-                [
-                    'text' => 'Pendentes',
-                    'url'  => 'admin/reservas-pendentes',
-                ],
-                [
-                    'text' => 'Finalizadas',
-                    'url'  => 'admin/reservas-finalizadas',
-                ]
-            ]
-        ],
+        
+        
         [
             'text' => 'Usuários',            
             'icon' => 'fas fa-fw fa-users',
             'submenu' => [
                 [
-                    'text' => 'Clientes',
+                    'text' => 'Alunos',
                     'url'  => 'admin/usuarios',
                 ],
                 [
@@ -292,11 +266,6 @@ return [
                     'url'  => 'admin/usuarios/create',
                 ]
             ]
-        ],
-        [
-            'text' => 'Empresas',
-            'url'  => 'admin/empresas',
-            'icon' => 'fas fa-industry',
         ],
         [
             'text' => 'Posts',            

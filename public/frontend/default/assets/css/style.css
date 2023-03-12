@@ -373,7 +373,7 @@ textarea:focus {
   background: #FFF600;
   font-family: "Teko", sans-serif;
   font-size: 18px;
-  color: #ffffff;
+  color: #333;
   display: inline-block;
   font-weight: 500;
   text-transform: uppercase;
@@ -391,7 +391,7 @@ textarea:focus {
 }
 .tp-btn:hover {
   background: #ffffff;
-  color: #FFF600;
+  color: #333;
 }
 
 .tp-btn:before {
@@ -884,7 +884,7 @@ textarea:focus {
 .top-btn {
   padding: 0 50px;
   background: #FFF600;
-  color: #ffffff;
+  color: #333;
   font-size: 18px;
   font-weight: 500;
   font-family: "Teko", sans-serif;
@@ -1302,7 +1302,7 @@ textarea:focus {
 }
 .sidebar__contact ul li:hover i {
   background: #FFF600;
-  color: #ffffff;
+  color: #333;
   border-color: #FFF600;
 }
 .sidebar__contact ul li:hover a {

@@ -68,7 +68,7 @@
                                 <span class="bg-green p-1">{{\Carbon\Carbon::parse($slide->expira)->format('d/m/Y')}}</span> 
                             @endif
                         </td>
-                        <td class="text-center"><a target="_blank" href="{{($slide->link != '' ? $slide->link : '#')}}"><i class="fas fa-link"></i></a></td>                            
+                        <td class="text-center"><a target="{{($slide->link != '' ? '_blank' : '_self')}}" href="{{($slide->link != '' ? $slide->link : 'javascript:void(0)')}}"><i class="fas fa-link"></i></a></td>                            
                         <td class="acoes">
                             <input type="checkbox" data-onstyle="success" data-offstyle="warning" data-size="mini" class="toggle-class" data-id="{{ $slide->id }}" data-toggle="toggle" data-style="slow" data-on="<i class='fas fa-check'></i>" data-off="<i style='color:#fff !important;' class='fas fa-exclamation-triangle'></i>" {{ $slide->status == true ? 'checked' : ''}}>
                             <a data-toggle="tooltip" data-placement="top" title="Editar Slide" href="{{route('slides.edit',$slide->id)}}" class="btn btn-xs btn-default"><i class="fas fa-pen"></i></a>

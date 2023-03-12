@@ -52,7 +52,7 @@ class WebController extends Controller
                     ->postson()
                     ->limit(6)
                     ->get();
-        $slides = Slide::orderBy('created_at', 'DESC')
+        $slides = Slide::orderBy('created_at', 'ASC')
                     ->available()
                     ->where('expira', '>=', Carbon::now())
                     ->get();   

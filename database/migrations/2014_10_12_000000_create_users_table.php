@@ -57,19 +57,6 @@ class CreateUsersTable extends Migration
             $table->string('whatsapp')->nullable();
             $table->string('skype')->nullable();
 
-            /** spouse */
-            $table->string('tipo_de_comunhao')->nullable();
-            $table->string('nome_conjuje')->nullable();
-            $table->string('genero_conjuje')->nullable();
-            $table->string('cpf_conjuje')->nullable();
-            $table->string('rg_conjuje', 20)->nullable();
-            $table->string('rg_expedicao_conjuje')->nullable();
-            $table->date('nasc_conjuje')->nullable();
-            $table->string('naturalidade_conjuje')->nullable();
-            $table->string('profissao_conjuje')->nullable();
-            $table->double('renda_conjuje', 10, 2)->nullable();
-            $table->string('profissao_empresa_conjuje')->nullable();
-
             /** Redes Sociais */
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();

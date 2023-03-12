@@ -1,6 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="pt-br">
-   <head>
+    <head>
         <meta charset="utf-8"/>    
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,120 +39,118 @@
         @hasSection('css')
             @yield('css')
         @endif
-   </head>
-   <body>
-      <!--[if lte IE 9]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-      <![endif]-->      
-
-      <!-- top-nav-start -->
-      <header class="top-nav">
-         <div class="top-address d-none d-lg-block">
+    </head>
+<body>
+    <!--[if lte IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->  
+      
+    <header class="top-nav">
+        <div class="top-address d-none d-lg-block">
             <div class="container">
-               <div class="row align-items-center">
-                  <div class="col-xxl-7 col-xl-5 col-lg-4 col-md-3">
-                     <div class="top-logo">
-                        <a href="{{route('web.home')}}">
-                            <img src="{{$configuracoes->getLogomarca()}}" alt="{{$configuracoes->nomedosite}}">
-                        </a>
-                     </div>
-                  </div>
-                  <div class="col-xxl-5 col-xl-7 col-lg-8 col-md-9">
-                     <div class="topbar-info">
-                        @if($configuracoes->rua)
-                            <div class="contact-item">
-                                <i class="flaticon-pin"></i>
-                                <div class="content">
-                                    <p>Visite-nos</p>
-                                    <a href="https://www.google.com/maps/place/Moriah+Treinamento+F%C3%ADsico+Funcional/@-23.4331434,-45.0820379,17z/data=!3m1!4b1!4m6!3m5!1s0x94cd519594308437:0xd1f9f43c7f76ca48!8m2!3d-23.4331434!4d-45.0798492!16s%2Fg%2F11shq07xqx" target="blank">
-                                        {{$configuracoes->rua}}
-                                        @if($configuracoes->num)
-                                            , {{$configuracoes->num}}
-                                        @endif
-                                    </a>
-                                </div>
-                            </div>
-                        @endif 
-                        @if ($configuracoes->whatsapp)
-                            <div class="contact-item">
-                                <i class="fab fa-whatsapp"></i>
-                                <div class="content">
-                                    <p>WhatsApp</p>
-                                    <a href="{{\App\Helpers\WhatsApp::getNumZap($configuracoes->whatsapp, 'Atendimento')}}">
-                                        <span class="__cf_email__">{{$configuracoes->whatsapp}}</span>
-                                    </a>
-                                </div>
-                            </div>
-                        @endif                        
-                        @if($configuracoes->telefone1)
-                            <div class="contact-item">
-                                <i class="flaticon-contact"></i>
-                                <div class="content">
-                                <p>Telefone</p>
-                                <a href="tel:{{$configuracoes->telefone1}}">{{$configuracoes->telefone1}}</a>
-                                </div>
-                            </div>                            
-                        @endif                        
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="menu-area" id="header-sticky">
-            <div class="container">
-               <div class="row align-items-center justify-content-center">
-                  <div class="col-xxl-12 col-xl-12 col-lg-12">
-                     <div class="topcontact-btn f-right d-none d-lg-block">
-                        <div class="contact-btn">
-                           <a href="contact.html" class="top-btn">Contact Us <i class="fal fa-chevron-double-right"></i></a>
-                        </div>
-                     </div>
-                     <div class="menu-content">
-                        <div class="top-logo d-lg-none">
+                <div class="row align-items-center">
+                    <div class="col-xxl-7 col-xl-5 col-lg-4 col-md-3">
+                        <div class="top-logo">
                             <a href="{{route('web.home')}}">
                                 <img src="{{$configuracoes->getLogomarca()}}" alt="{{$configuracoes->nomedosite}}">
                             </a>
                         </div>
-                        <div class="main-menu">
-                           <nav id="mobile-menu">
-                              <ul>
-                                 <li><a href="{{route('web.home')}}" class="active">Início </a></li>                                 
-                                 @if (!empty($Links) && $Links->count())                            
-                                    @foreach($Links as $menuItem)                            
-                                    <li>
-                                        <a {{($menuItem->target == 1 ? 'target=_blank' : '')}} 
-                                            href="{{($menuItem->tipo == 'Página' ? route('web.pagina', [ 'slug' => ($menuItem->post != null ? $menuItem->PostObject->slug : '#') ]) : $menuItem->url)}}">{{ $menuItem->titulo }}{!!($menuItem->children && $menuItem->parent ? " <i class=\"fal fa-plus dropdown-icon\"></i>" : '')!!}</a>
-                                        @if( $menuItem->children && $menuItem->parent)
-                                        <ul class="sub-menu">
-                                            @foreach($menuItem->children as $subMenuItem)
-                                                <li><a {{($subMenuItem->target == 1 ? 'target=_blank' : '')}} href="{{($subMenuItem->tipo == 'Página' ? route('web.pagina', [ 'slug' => ($subMenuItem->post != null ? $subMenuItem->PostObject->slug : '#') ]) : $subMenuItem->url)}}">{{ $subMenuItem->titulo }}</a></li>                                        
-                                            @endforeach
-                                        </ul>
-                                        @endif
-                                    </li>
-                                    @endforeach
-                                @endif
-                                <li><a href="{{route('web.atendimento')}}">Atendimento </a></li>                                 
-                              </ul>
-                           </nav>
+                    </div>
+                    <div class="col-xxl-5 col-xl-7 col-lg-8 col-md-9">
+                        <div class="topbar-info">
+                            @if($configuracoes->rua)
+                                <div class="contact-item">
+                                    <i class="flaticon-pin"></i>
+                                    <div class="content">
+                                        <p>Visite-nos</p>
+                                        <a href="https://www.google.com/maps/place/Moriah+Treinamento+F%C3%ADsico+Funcional/@-23.4331434,-45.0820379,17z/data=!3m1!4b1!4m6!3m5!1s0x94cd519594308437:0xd1f9f43c7f76ca48!8m2!3d-23.4331434!4d-45.0798492!16s%2Fg%2F11shq07xqx" target="blank">
+                                            {{$configuracoes->rua}}
+                                            @if($configuracoes->num)
+                                                , {{$configuracoes->num}}
+                                            @endif
+                                        </a>
+                                    </div>
+                                </div>
+                            @endif 
+                            @if ($configuracoes->whatsapp)
+                                <div class="contact-item">
+                                    <i class="fab fa-whatsapp"></i>
+                                    <div class="content">
+                                        <p>WhatsApp</p>
+                                        <a href="{{\App\Helpers\WhatsApp::getNumZap($configuracoes->whatsapp, 'Atendimento')}}">
+                                            <span class="__cf_email__">{{$configuracoes->whatsapp}}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            @endif                        
+                            @if($configuracoes->telefone1)
+                                <div class="contact-item">
+                                    <i class="flaticon-contact"></i>
+                                    <div class="content">
+                                    <p>Telefone</p>
+                                    <a href="tel:{{$configuracoes->telefone1}}">{{$configuracoes->telefone1}}</a>
+                                    </div>
+                                </div>                            
+                            @endif                        
                         </div>
-                        <div class="side-menu-icon d-lg-none text-end">
-                           <a href="javascript:void(0)" class="info-toggle-btn f-right sidebar-toggle-btn"><i class="fal fa-bars"></i></a>
-                        </div>
-                        {{--
-                        <div class="header-action-btn f-right d-none d-lg-block">
-                           <a href="javascript:void(0)" data-bs-toggle="modal" class="search" data-bs-target="#search-modal"><i class="far fa-search"></i></a>
-                           <a href="cart.html"><i class="fas fa-shopping-basket"></i>
-                              <span>0</span>
-                           </a>
-                        </div>--}}
-                     </div>
-                  </div>
-               </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </header>
-      <!-- top-nav-end -->
+        </div>
+        <div class="menu-area" id="header-sticky">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12">
+                        <div class="topcontact-btn f-right d-none d-lg-block">
+                            <div class="contact-btn">
+                                <a href="{{route('web.atendimento')}}" class="top-btn">Atendimento <i class="fal fa-chevron-double-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="menu-content">
+                            <div class="top-logo d-lg-none">
+                                <a href="{{route('web.home')}}">
+                                    <img src="{{$configuracoes->getLogomarca()}}" alt="{{$configuracoes->nomedosite}}">
+                                </a>
+                            </div>
+                            <div class="main-menu">
+                            <nav id="mobile-menu">
+                                <ul>
+                                    <li><a href="{{route('web.home')}}" class="active">Início </a></li>                                 
+                                    @if (!empty($Links) && $Links->count())                            
+                                        @foreach($Links as $menuItem)                            
+                                        <li>
+                                            <a {{($menuItem->target == 1 ? 'target=_blank' : '')}} 
+                                                href="{{($menuItem->tipo == 'Página' ? route('web.pagina', [ 'slug' => ($menuItem->post != null ? $menuItem->PostObject->slug : '#') ]) : $menuItem->url)}}">{{ $menuItem->titulo }}{!!($menuItem->children && $menuItem->parent ? " <i class=\"fal fa-plus dropdown-icon\"></i>" : '')!!}</a>
+                                            @if( $menuItem->children && $menuItem->parent)
+                                            <ul class="sub-menu">
+                                                @foreach($menuItem->children as $subMenuItem)
+                                                    <li><a {{($subMenuItem->target == 1 ? 'target=_blank' : '')}} href="{{($subMenuItem->tipo == 'Página' ? route('web.pagina', [ 'slug' => ($subMenuItem->post != null ? $subMenuItem->PostObject->slug : '#') ]) : $subMenuItem->url)}}">{{ $subMenuItem->titulo }}</a></li>                                        
+                                                @endforeach
+                                            </ul>
+                                            @endif
+                                        </li>
+                                        @endforeach
+                                    @endif
+                                    <li><a href="{{route('web.atendimento')}}">Atendimento </a></li>                                 
+                                </ul>
+                            </nav>
+                            </div>
+                            <div class="side-menu-icon d-lg-none text-end">
+                            <a href="javascript:void(0)" class="info-toggle-btn f-right sidebar-toggle-btn"><i class="fal fa-bars"></i></a>
+                            </div>
+                            {{--
+                            <div class="header-action-btn f-right d-none d-lg-block">
+                            <a href="javascript:void(0)" data-bs-toggle="modal" class="search" data-bs-target="#search-modal"><i class="far fa-search"></i></a>
+                            <a href="cart.html"><i class="fas fa-shopping-basket"></i>
+                                <span>0</span>
+                            </a>
+                            </div>--}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
       <!-- sidebar area start -->
       <div class="sidebar__area">
@@ -163,55 +161,67 @@
                </button>
             </div>
             <div class="sidebar__content">
-               <div class="sidebar__logo mb-40">
-                  <a href="index.html">
-                  <img src="{{$configuracoes->getLogomarca()}}" alt="logo">
-                  </a>
-               </div>
-               <div class="sidebar__search mb-25">
-                  <form action="#">
-                     <input type="text" placeholder="What are you searching for?">
-                     <button type="submit" ><i class="far fa-search"></i></button>
-                  </form>
-               </div>
-               <div class="mobile-menu fix"></div>
-               <div class="sidebar__contact mt-30 mb-20">
-                  <h4>Contact Info</h4>
-                  <ul>
-                     <li class="d-flex align-items-center">
-                        <div class="sidebar__contact-icon mr-15">
-                           <i class="fal fa-map-marker-alt"></i>
-                        </div>
-                        <div class="sidebar__contact-text">
-                           <a target="_blank" href="https://www.google.com/maps/place/Dhaka/@23.7806207,90.3492859,12z/data=!3m1!4b1!4m5!3m4!1s0x3755b8b087026b81:0x8fa563bbdd5904c2!8m2!3d23.8104753!4d90.4119873">12/A, Mirnada City Tower, NYC</a>
-                        </div>
-                     </li>
-                     <li class="d-flex align-items-center">
-                        <div class="sidebar__contact-icon mr-15">
-                           <i class="far fa-phone"></i>
-                        </div>
-                        <div class="sidebar__contact-text">
-                           <a href="tel:+012-345-6789">088889797697</a>
-                        </div>
-                     </li>
-                     <li class="d-flex align-items-center">
-                        <div class="sidebar__contact-icon mr-15">
-                           <i class="fal fa-envelope"></i>
-                        </div>
-                        <div class="sidebar__contact-text">
-                           <a href="/cdn-cgi/l/email-protection#7c0f090c0c130e083c1b111d1510521f1311"><span class="__cf_email__" data-cfemail="5d2e282d2d322f291d303c3431733e3230">[email&#160;protected]</span></a>
-                        </div>
-                     </li>
-                  </ul>
-               </div>
-               <div class="sidebar__social">
-                  <ul>
-                     <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                     <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                     <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                     <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                  </ul>
-               </div>
+                <div class="sidebar__logo mb-40">
+                    <a href="{{route('web.home')}}">
+                        <img src="{{$configuracoes->getLogomarca()}}" alt="{{$configuracoes->nomedosite}}">
+                    </a>
+                </div>                
+                <div class="mobile-menu fix"></div>
+                <div class="sidebar__contact mt-30 mb-20">
+                    <h4>Atendimento</h4>
+                    <ul>
+                        @if($configuracoes->rua)
+                            <li class="d-flex align-items-center">
+                                <div class="sidebar__contact-icon mr-15">
+                                    <i class="fal fa-map-marker-alt"></i>
+                                </div>
+                                <div class="sidebar__contact-text">
+                                    <a target="_blank" href="https://www.google.com/maps/place/Moriah+Treinamento+F%C3%ADsico+Funcional/@-23.4331434,-45.0820379,17z/data=!3m1!4b1!4m6!3m5!1s0x94cd519594308437:0xd1f9f43c7f76ca48!8m2!3d-23.4331434!4d-45.0798492!16s%2Fg%2F11shq07xqx">
+                                        {{$configuracoes->rua}}
+                                        @if($configuracoes->num)
+                                            , {{$configuracoes->num}}
+                                        @endif
+                                    </a>
+                                </div>
+                            </li>
+                        @endif                        
+                        <li class="d-flex align-items-center">
+                            <div class="sidebar__contact-icon mr-15">
+                            <i class="far fa-phone"></i>
+                            </div>
+                            <div class="sidebar__contact-text">
+                            <a href="tel:+012-345-6789">088889797697</a>
+                            </div>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <div class="sidebar__contact-icon mr-15">
+                            <i class="fal fa-envelope"></i>
+                            </div>
+                            <div class="sidebar__contact-text">
+                            <a href="/cdn-cgi/l/email-protection#7c0f090c0c130e083c1b111d1510521f1311"><span class="__cf_email__" data-cfemail="5d2e282d2d322f291d303c3431733e3230">[email&#160;protected]</span></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="sidebar__social">
+                    <ul>
+                        @if ($configuracoes->facebook)
+                            <a target="_blank" href="{{$configuracoes->facebook}}" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        @endif
+                        @if ($configuracoes->instagram)
+                            <a target="_blank" href="{{$configuracoes->instagram}}" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        @endif
+                        @if ($configuracoes->twitter)
+                            <a target="_blank" href="{{$configuracoes->twitter}}" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        @endif
+                        @if ($configuracoes->youtube)
+                            <a target="_blank" href="{{$configuracoes->youtube}}" title="Youtube"><i class="fab fa-youtube"></i></a>
+                        @endif
+                        @if ($configuracoes->linkedin)
+                            <a target="_blank" href="{{$configuracoes->linkedin}}" title="Linkedin"><i class="fab fa-linkedin"></i></a>
+                        @endif
+                    </ul>
+                </div>
             </div>
          </div>
       </div>

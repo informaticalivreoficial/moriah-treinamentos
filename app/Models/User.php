@@ -21,7 +21,6 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'tenant_id',
         'email',
         'email1',
         'password',
@@ -45,17 +44,6 @@ class User extends Authenticatable
         //Redes
         'facebook', 'twitter', 'instagram', 'linkedin', 'vimeo',
         'youtube', 'fliccr', 'soundclound', 'snapchat',
-        'tipo_de_comunhao',
-        'nome_conjuje',
-        'genero_conjuje',
-        'cpf_conjuje',
-        'rg_conjuje',
-        'rg_expedicao_conjuje',
-        'nasc_conjuje',
-        'naturalidade_conjuje',
-        'profissao_conjuje',
-        'renda_conjuje',
-        'profissao_empresa_conjuje',
         'admin',
         'client',
         'editor',
@@ -117,7 +105,7 @@ class User extends Authenticatable
         if($this->admin == 1 && $this->client == 0 && $this->superadmin == 0){
             return 'Administrador';
         }elseif($this->admin == 0 && $this->client == 1 && $this->superadmin == 0){
-            return 'Cliente';
+            return 'Aluno';
         }elseif($this->admin == 0 && $this->client == 0 && $this->editor == 1 && $this->superadmin == 0){
             return 'Editor';
         }elseif($this->admin == 1 && $this->client == 1 && $this->superadmin == 0){
@@ -293,56 +281,6 @@ class User extends Authenticatable
         $this->attributes['senha'] = $value;
         $this->attributes['password'] = bcrypt($value);
     } 
-
-    public function setCpfconjujeAttribute($value)
-    {
-        $this->attributes['cpf_conjuje'] = (!empty($value) ? $this->clearField($value) : null);
-    }
-    
-    public function getCpfconjujeAttribute($value)
-    {
-        if (empty($value)) {
-            return null;
-        }
-
-        return
-            substr($value, 0, 3) . '.' .
-            substr($value, 3, 3) . '.' .
-            substr($value, 6, 3) . '-' .
-            substr($value, 9, 2);
-    }
-    
-    public function setRgconjujeAttribute($value)
-    {
-        $this->attributes['rg_conjuje'] = (!empty($value) ? $this->clearField($value) : null);
-    }
-    
-    public function getRgconjujeAttribute($value)
-    {
-        if (empty($value)) {
-            return null;
-        }
-
-        return
-            substr($value, 0, 2) . '.' .
-            substr($value, 2, 3) . '.' .
-            substr($value, 5, 3) . '-' .
-            substr($value, 8, 1);
-    }
-    
-    public function setNascconjujeAttribute($value)
-    {
-        $this->attributes['nasc_conjuje'] = (!empty($value) ? $this->convertStringToDate($value) : null);
-    }
-    
-    public function getNascconjujeAttribute($value)
-    {
-        if (empty($value)) {
-            return null;
-        }
-
-        return date('d/m/Y', strtotime($value));
-    }
 
     public function setAdminAttribute($value)
     {

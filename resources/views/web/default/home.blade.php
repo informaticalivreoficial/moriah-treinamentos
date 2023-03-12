@@ -13,15 +13,20 @@
                         <div class="row ">
                             <div class="col-lg-12">
                                 <div class="slider-all-text">
-                                    <span data-animation="fadeInUp" data-delay=".2s">Fitness Zone</span>
-                                    <h2 class="hero-title" data-animation="fadeInUp" data-delay=".4s">be storong</h2>
-                                    <p class="description mt-10 mb-50" data-animation="fadeInUp" data-delay=".6s">Hardest part is walking out in the front door</p>
-                                    <div class="play-option" data-animation="fadeInUp" data-delay=".8s">
-                                        <a href="about.html" class="tp-btn">explore More <i class="fal fa-chevron-double-right"></i></a>
-                                        <a class="video-play-button hero-play popup-video ml-30" href="https://www.youtube.com/watch?v=ZoZSp-wy8h8">
-                                            <i class="fas fa-play"></i>
-                                        </a>
-                                    </div>
+                                    <span data-animation="fadeInUp" data-delay=".2s">{{$slide->categoria}}</span>
+                                    <p class="description mt-10 mb-50" data-animation="fadeInUp" data-delay=".6s">{{$slide->titulo}}</p>
+                                    @if ($slide->link)
+                                       <div class="play-option" data-animation="fadeInUp" data-delay=".8s">
+                                          <a {{($slide->target == 1 ? 'target="_blank"' : '')}} href="{{$slide->link}}" class="tp-btn">Saiba Mais <i class="fal fa-chevron-double-right"></i></a>
+                                          @php
+                                             if (strpos($slide->link, 'youtube') !== false) {
+                                                echo '<a class="video-play-button hero-play popup-video ml-30" href="https://www.youtube.com/watch?v=ZoZSp-wy8h8">
+                                                         <i class="fas fa-play"></i>
+                                                      </a>';
+                                             }
+                                          @endphp                                          
+                                       </div>
+                                    @endif                                    
                                 </div>
                                 <div class="hero-social-icon">
                                     @if ($configuracoes->facebook)

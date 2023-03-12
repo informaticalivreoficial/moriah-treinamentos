@@ -76,7 +76,7 @@ class SlideController extends Controller
             //Cropper::flush($slide->imagem);
             $slide->imagem = '';
         }
-
+        //dd($request->all());
         $slide->fill($request->all());
         $slide->setSlug();
 

@@ -1,16 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Gerenciar Clientes')
+@section('title', 'Gerenciar Alunos')
 
 @section('content_header')
 <div class="row mb-2">
     <div class="col-sm-6">
-        <h1><i class="fas fa-search mr-2"></i> Clientes</h1>
+        <h1><i class="fas fa-search mr-2"></i> Alunos</h1>
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">                    
             <li class="breadcrumb-item"><a href="{{route('home')}}">Painel de Controle</a></li>
-            <li class="breadcrumb-item active">Clientes</li>
+            <li class="breadcrumb-item active">Alunos</li>
         </ol>
     </div>
 </div>
@@ -81,7 +81,7 @@
                             @endphp
                             <td class="text-center">
                                 <a href="{{url($cover)}}" data-title="{{$user->name}}" data-toggle="lightbox">
-                                    <img alt="{{$user->name}}" class="table-avatar" src="{{url($cover)}}">
+                                    <img style="max-height:55px !important;min-width:50px !important;min-height:50px !important;" alt="{{$user->name}}" class="table-avatar" src="{{url($cover)}}">
                                 </a>
                             </td>
                             <td>{{$user->name}}</td>
