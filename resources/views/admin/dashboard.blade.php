@@ -47,7 +47,7 @@
             <span class="info-box-icon bg-teal"><a href="{{ route('users.index') }}" title="Clientes"><i class="fa far fa-users"></i></a></span>
 
             <div class="info-box-content">
-                <span class="info-box-text"><b>Clientes</b></span>
+                <span class="info-box-text"><b>Alunos</b></span>
                 <span class="info-box-text">Ativos: {{ $clientesAvailable }}</span>
                 <span class="info-box-text">Inativos: {{ $clientesUnavailable }}</span>
                 <span class="info-box-text">Total: {{ $clientesAvailable + $clientesUnavailable }}</span>

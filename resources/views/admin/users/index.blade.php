@@ -59,7 +59,7 @@
                             <th>Foto</th>
                             <th>Nome</th>
                             <th>CPF</th>
-                            <th>Perfil</th>
+                            <th>Situação</th>
                             <th>Ações</th>
                         </tr>
                     </thead>

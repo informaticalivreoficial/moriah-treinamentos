@@ -247,8 +247,34 @@ return [
             'url'  => 'admin/menus',
             'icon' => 'fas fa-bars',
         ],
-        
-        
+        [
+            'text' => 'Planos',            
+            'icon' => 'fas fa-fw fa-list-alt',
+            'submenu' => [
+                [
+                    'text' => 'Listar Planos',
+                    'url'  => 'admin/planos',
+                ],
+                [
+                    'text' => 'Cadastrar Plano',
+                    'url'  => 'admin/planos/create',
+                ],
+            ]
+        ],
+        [
+            'text' => 'Academia',            
+            'icon' => 'fas fa-fw fa-dumbbell',
+            'submenu' => [
+                [
+                    'text' => 'Modalidades',
+                    'url'  => 'admin/academia/modalidades',
+                ],
+                [
+                    'text' => 'Turmas',
+                    'url'  => 'admin/academia/Turmas',
+                ]
+            ]
+        ],        
         [
             'text' => 'Usuários',            
             'icon' => 'fas fa-fw fa-users',

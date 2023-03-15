@@ -42,12 +42,14 @@
             <div class="row">            
                 <div class="col-12">
                     <div class="card card-teal card-outline card-outline-tabs">
-
                         <div class="card-header p-0 border-bottom-0">
                             <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">Dados Cadastrais</a>
-                                </li>                               
+                                </li>   
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-tabs-four-responsavel-tab" data-toggle="pill" href="#custom-tabs-four-responsavel" role="tab" aria-controls="custom-tabs-four-responsavel" aria-selected="false">Responsável</a>
+                                </li>                            
                                 <li class="nav-item">
                                     <a class="nav-link" id="custom-tabs-four-redes-tab" data-toggle="pill" href="#custom-tabs-four-redes" role="tab" aria-controls="custom-tabs-four-redes" aria-selected="false">Redes Sociais</a>
                                 </li>
@@ -59,8 +61,6 @@
                         <div class="card-body">
                             <div class="tab-content" id="custom-tabs-four-tabContent">
                                 <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
-
-
                                     <div class="row">                                        
                                         <div class="col-12 col-md-6 col-lg-3"> 
                                             <div class="form-group">
@@ -290,8 +290,8 @@
                                                         </div>
                                                         <div class="col-12 col-md-6 col-lg-4"> 
                                                             <div class="form-group">
-                                                                <label class="labelforms text-muted"><b>Skype:</b></label>
-                                                                <input type="text" class="form-control" placeholder="Usuário Skype" name="skype" value="{{old('skype') ?? $user->skype}}">
+                                                                <label class="labelforms text-muted"><b>Telegram:</b></label>
+                                                                <input type="text" class="form-control" placeholder="Usuário Telegram" name="telegram" value="{{old('telegram') ?? $user->telegram}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -330,8 +330,42 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div> 
+                                </div>
+
+                                <div class="tab-pane fade" id="custom-tabs-four-responsavel" role="tabpanel" aria-labelledby="custom-tabs-four-responsavel-tab">
+                                    <div class="row mb-2 text-muted">
+                                        <div class="col-sm-12 text-muted">
+                                            <div class="form-group">
+                                                <h5><b>Responsável</b></h5>            
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="col-12 col-md-6 col-lg-4"> 
+                                            <div class="form-group">
+                                                <label class="labelforms text-muted"><b>Nome:</b></label>
+                                                <input type="text" class="form-control text-muted" placeholder="Nome" name="responsavel_nome" value="{{old('responsavel_nome') ?? $user->responsavel_nome}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-3"> 
+                                            <div class="form-group">
+                                                <label class="labelforms text-muted"><b>CPF:</b></label>
+                                                <input type="text" class="form-control text-muted cpfmask" placeholder="CPF" name="responsavel_cpf" value="{{old('responsavel_cpf') ?? $user->responsavel_cpf}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-3"> 
+                                            <div class="form-group">
+                                                <label class="labelforms text-muted"><b>RG:</b></label>
+                                                <input type="text" class="form-control text-muted rgmask" placeholder="RG" name="responsavel_rg" value="{{old('responsavel_rg') ?? $user->responsavel_rg}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-2"> 
+                                            <div class="form-group">
+                                                <label class="labelforms text-muted"><b>Telefone:</b></label>
+                                                <input type="text" class="form-control text-muted celularmask" placeholder="Telefone" name="responsavel_telefone" value="{{old('responsavel_telefone') ?? $user->responsavel_telefone}}">
+                                            </div>
+                                        </div>                                                                               
+                                    </div>
                                 </div>
 
                                 <div class="tab-pane fade" id="custom-tabs-four-redes" role="tabpanel" aria-labelledby="custom-tabs-four-redes-tab">
@@ -383,19 +417,7 @@
                                                 <label class="labelforms text-muted"><b>Linkedin:</b></label>
                                                 <input type="text" class="form-control text-muted" placeholder="Linkedin" name="linkedin" value="{{old('linkedin') ?? $user->linkedin}}">
                                             </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-lg-4"> 
-                                            <div class="form-group">
-                                                <label class="labelforms text-muted"><b>Sound Cloud:</b></label>
-                                                <input type="text" class="form-control text-muted" placeholder="Linkedin" name="soundclound" value="{{old('soundclound') ?? $user->soundclound}}">
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-lg-4"> 
-                                            <div class="form-group">
-                                                <label class="labelforms text-muted"><b>SnapChat:</b></label>
-                                                <input type="text" class="form-control text-muted" placeholder="SnapChat" name="snapchat" value="{{old('snapchat') ?? $user->snapchat}}">
-                                            </div>
-                                        </div>
+                                        </div>                                        
                                     </div>
                                 </div>                                
                                 <div class="tab-pane fade" id="custom-tabs-four-permissoes" role="tabpanel" aria-labelledby="custom-tabs-four-permissoes-tab">

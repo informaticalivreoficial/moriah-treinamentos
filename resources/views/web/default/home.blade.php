@@ -110,68 +110,8 @@
  </div>
  <!-- tp-about-area-end -->
 
- <!-- services-list-start -->
- <div class="services-list mt-100" data-background="assets/img/services/services-bg.jpg">
-    <div class="container custome-container">
-       <div class="section-wrap-two text-center wow fadeInUp" data-wow-delay=".2s">
-          <span class="tpsub-title-two mb-15"><i class="far fa-circle"></i>Our services<i class="far fa-circle"></i></span>
-          <h3 class="section-title-two  mb-30 white-color">Solutions for moving better and feeling a healthier</h3>
-       </div>
-       <div class="row mt-60">
-          <div class="col-lg-3 col-md-6 col-sm-6">
-             <div class="services-item text-center wow fadeInUp mb-30" data-wow-delay=".6s">
-                <div class="sv-inner sv-inner2">
-                   <div class="services-icon">
-                      <i class="flaticon-dumbbell"></i>
-                   </div>
-                </div>
-                <h4 class="services-item-title services-item-title-2 mb-20"><a href="protfolio-details.html">Weight Lifting</a></h4>
-                <p class="mb-25">Commodo metuse a dictum faucibus felis</p>
-                   <a href="protfolio-details.html" class="services-item-btn">Read More <i class="fal fa-chevron-double-right"></i></a>
-             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-             <div class="services-item text-center wow fadeInUp mb-30" data-wow-delay=".9s">
-                <div class="sv-inner sv-inner2">
-                   <div class="services-icon">
-                      <i class="flaticon-muscle"></i>
-                   </div>
-                </div>
-                <h4 class="services-item-title services-item-title-2 mb-20"><a href="protfolio-details.html">Power Yoga</a></h4>
-                <p class="mb-25">Feugiat varius facilisis mus, Commodo metu</p>
-                   <a href="protfolio-details.html" class="services-item-btn">Read More <i class="fal fa-chevron-double-right"></i></a>
-             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-             <div class="services-item text-center wow fadeInUp mb-30" data-wow-delay="1s">
-                <div class="sv-inner sv-inner2">
-                   <div class="services-icon">
-                      <i class="flaticon-customer"></i>
-                   </div>
-                </div>
-                <h4 class="services-item-title services-item-title-2 mb-20"><a href="protfolio-details.html">Crosfit Tools</a></h4>
-                <p class="mb-25">Dictum faucibus felis, Feugiat varius facilisis</p>
-                   <a href="protfolio-details.html" class="services-item-btn">Read More <i class="fal fa-chevron-double-right"></i></a>
-             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-             <div class="services-item text-center wow fadeInUp mb-30" data-wow-delay="1.4s">
-                <div class="sv-inner sv-inner2">
-                   <div class="services-icon">
-                      <i class="flaticon-lawn-mower"></i>
-                   </div>
-                </div>
-                <h4 class="services-item-title services-item-title-2 mb-20"><a href="protfolio-details.html">Body Building</a></h4>
-                <p class="mb-25">Varius facilisis Dictum faucibus feugiat facil</p>
-                   <a href="protfolio-details.html" class="services-item-btn">Read More <i class="fal fa-chevron-double-right"></i></a>
-             </div>
-          </div>
-       </div>
-    </div>
- </div>
- <!-- services-list-end -->
 
- <!-- tpcounter-area -->
+ {{-- tpcounter-area 
  <div class="tpcounter-area">
     <div class="container">
        <div class="row">
@@ -240,7 +180,7 @@
        </div>
     </div>
  </div>
- <!-- tpcounter-area-end -->
+  --}}
 
  <!-- fitness-gallery-area-start -->
  <div class="fitness-gallery-area">

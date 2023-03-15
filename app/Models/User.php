@@ -40,22 +40,23 @@ class User extends Authenticatable
         //Endereço
         'cep', 'rua', 'num', 'complemento', 'bairro', 'uf', 'cidade',
         //Contato
-        'telefone', 'celular', 'whatsapp', 'skype',
+        'telefone', 'celular', 'whatsapp', 'telegram',
         //Redes
-        'facebook', 'twitter', 'instagram', 'linkedin', 'vimeo',
-        'youtube', 'fliccr', 'soundclound', 'snapchat',
-        'admin',
-        'client',
-        'editor',
-        'superadmin',
-        'status'
+        'facebook', 'twitter', 'instagram', 'linkedin', 'vimeo', 'youtube', 'fliccr', 
+        //Responsável
+        'responsavel_nome',
+        'responsavel_cpf',
+        'responsavel_rg',
+        'responsavel_telefone',
+        //Permissão
+        'admin', 'client', 'editor', 'superadmin', 'status'
     ];
 
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var array
-     */
+    */
     protected $hidden = [
         'password',
         'remember_token',

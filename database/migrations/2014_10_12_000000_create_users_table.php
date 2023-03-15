@@ -26,6 +26,12 @@ class CreateUsersTable extends Migration
             $table->dateTime('last_login_at')->nullable();
             $table->string('last_login_ip')->nullable();
 
+            /** Responsável */
+            $table->string('responsavel_nome')->nullable();
+            $table->string('responsavel_cpf')->nullable();
+            $table->string('responsavel_rg', 20)->nullable();
+            $table->string('responsavel_telefone')->nullable();
+
             /** data */
             $table->string('genero')->nullable();
             $table->string('cpf')->nullable();
@@ -55,7 +61,7 @@ class CreateUsersTable extends Migration
             $table->string('telefone')->nullable();
             $table->string('celular')->nullable();
             $table->string('whatsapp')->nullable();
-            $table->string('skype')->nullable();
+            $table->string('telegram')->nullable();
 
             /** Redes Sociais */
             $table->string('facebook')->nullable();
@@ -65,8 +71,6 @@ class CreateUsersTable extends Migration
             $table->string('linkedin')->nullable();
             $table->string('instagram')->nullable();
             $table->string('fliccr')->nullable();
-            $table->string('soundclound')->nullable();
-            $table->string('snapchat')->nullable();
 
             /** access */
             $table->boolean('admin')->nullable();
