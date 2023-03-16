@@ -32,6 +32,15 @@ class Plano extends Model
     /**
      * Scopes
     */
+    public function scopeAvailable($query)
+    {
+        return $query->where('status', 1);
+    }
+
+    public function scopeUnavailable($query)
+    {
+        return $query->where('status', 0);
+    }
 
     /**
      * Relacionamentos
@@ -40,6 +49,61 @@ class Plano extends Model
     /**
      * Accerssors and Mutators
     */
+    public function setValorMensalAttribute($value)
+    {
+        $this->attributes['valor_mensal'] = (!empty($value) ? floatval($this->convertStringToDouble($value)) : null);
+    }
+
+    public function getValorMensalAttribute($value)
+    {
+        if (empty($value)) {
+            return null;
+        }
+
+        return number_format($value, 2, ',', '.');
+    }
+
+    public function setValorTrimestralAttribute($value)
+    {
+        $this->attributes['valor_trimestral'] = (!empty($value) ? floatval($this->convertStringToDouble($value)) : null);
+    }
+
+    public function getValorTrimestralAttribute($value)
+    {
+        if (empty($value)) {
+            return null;
+        }
+
+        return number_format($value, 2, ',', '.');
+    }
+
+    public function setValorSemestralAttribute($value)
+    {
+        $this->attributes['valor_semestral'] = (!empty($value) ? floatval($this->convertStringToDouble($value)) : null);
+    }
+
+    public function getValorSemestralAttribute($value)
+    {
+        if (empty($value)) {
+            return null;
+        }
+
+        return number_format($value, 2, ',', '.');
+    }
+
+    public function setValorAnualAttribute($value)
+    {
+        $this->attributes['valor_anual'] = (!empty($value) ? floatval($this->convertStringToDouble($value)) : null);
+    }
+
+    public function getValorAnualAttribute($value)
+    {
+        if (empty($value)) {
+            return null;
+        }
+
+        return number_format($value, 2, ',', '.');
+    }
 
     /**
      * Mutator Segunda
@@ -102,5 +166,13 @@ class Plano extends Model
     public function setSabadoAttribute($value)
     {
         $this->attributes['sabado'] = (($value === true || $value === 'on') ? 1 : 0);
+    }
+
+    private function convertStringToDouble($param)
+    {
+        if(empty($param)){
+            return null;
+        }
+        return str_replace(',', '.', str_replace('.', '', $param));
     }
 }

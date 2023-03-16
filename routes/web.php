@@ -253,5 +253,4 @@ Route::prefix('admin')->middleware('auth')->group( function(){
     Route::get('/', [AdminController::class, 'home'])->name('home');
 });
 
-
 Auth::routes();

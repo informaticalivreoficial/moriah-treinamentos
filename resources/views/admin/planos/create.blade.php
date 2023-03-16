@@ -53,7 +53,7 @@ $config = [
 </div>   
                     
             
-<form action="{{ route('planos.store') }}" method="post" enctype="multipart/form-data" autocomplete="off">
+<form action="{{ route('planos.store') }}" method="post">
     @csrf          
     <div class="row">            
         <div class="col-12">
