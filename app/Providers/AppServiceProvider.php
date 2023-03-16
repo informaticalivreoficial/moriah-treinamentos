@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Models\Menu;
 use App\Models\NewsletterCat;
-use App\Models\WhatsappCat;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -37,10 +36,6 @@ class AppServiceProvider extends ServiceProvider
         //Newsletter FORM
         $newsletter = NewsletterCat::where('sistema', 1)->where('status', 1)->get();
         View()->share('newsletterForm', $newsletter);
-
-        //WhatsApp FORM
-        $whatsapp = WhatsappCat::where('sistema', 1)->where('status', 1)->get();
-        View()->share('whatsappForm', $whatsapp);
 
         //Links
         $Links = Menu::whereNull('id_pai')->orderby('created_at', 'DESC')

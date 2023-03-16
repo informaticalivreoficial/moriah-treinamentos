@@ -45,6 +45,7 @@ class Plano extends Model
     /**
      * Relacionamentos
     */
+    
 
     /**
      * Accerssors and Mutators

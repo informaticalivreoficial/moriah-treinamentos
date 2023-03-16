@@ -22,6 +22,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'plano',
         'email1',
         'password',
         'remember_token',
@@ -73,7 +74,12 @@ class User extends Authenticatable
 
     /**
      * Relacionamentos
-     */
+    */
+    public function getPlano()
+    {
+        return $this->hasOne(Plano::class, 'id', 'plano');
+    }
+
     public function posts()
     {
         return $this->hasMany(Post::class, 'autor', 'id');

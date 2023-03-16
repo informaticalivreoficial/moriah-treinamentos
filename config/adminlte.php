@@ -243,7 +243,7 @@ return [
             'icon' => 'fas fa-cog',
         ],
         [
-            'text' => 'Menu',
+            'text' => 'Menu Site',
             'url'  => 'admin/menus',
             'icon' => 'fas fa-bars',
         ],
@@ -260,6 +260,11 @@ return [
                     'url'  => 'admin/planos/create',
                 ],
             ]
+        ],
+        [
+            'text' => 'Pedidos',            
+            'icon' => 'fas fa-money-check',
+            'url' => 'admin/pedidos',                
         ],
         [
             'text' => 'Academia',            
@@ -316,11 +321,6 @@ return [
             ]
         ],
         [
-            'text' => 'Avaliações',
-            'url'  => 'admin/avaliacoes',
-            'icon' => 'fas fa-bullhorn',
-        ], 
-        [
             'text' => 'Banner Slides',
             'url'  => 'admin/slides',
             'icon' => 'fas fa-film',
@@ -349,24 +349,6 @@ return [
                 [
                     'text' => 'Cadastrar Email',
                     'url'  => 'admin/listas/email/cadastrar',
-                ],
-            ]
-        ],      
-        [
-            'text' => 'WhatsApp',            
-            'icon' => 'fab fa-fw fa-whatsapp',
-            'submenu' => [
-                [
-                    'text' => 'Listas',
-                    'url'  => 'admin/whatsapp/listas',
-                ],
-                [
-                    'text' => 'Cadastrar Lista',
-                    'url'  => 'admin/whatsapp/listas/cadastrar',
-                ],
-                [
-                    'text' => 'Cadastrar Email',
-                    'url'  => 'admin/whatsapp/numero/cadastrar',
                 ],
             ]
         ],
