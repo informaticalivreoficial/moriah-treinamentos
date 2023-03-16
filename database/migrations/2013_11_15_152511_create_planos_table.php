@@ -27,7 +27,7 @@ class CreatePlanosTable extends Migration
             $table->boolean('quinta')->nullable();
             $table->boolean('sexta')->nullable();
             $table->boolean('sabado')->nullable();
-            $table->timestamp("horario")->nullable();            
+            $table->time("horario")->nullable();            
             
             $table->decimal('valor_mensal', 10, 2)->nullable();            
             $table->decimal('valor_trimestral', 10, 2)->nullable();            

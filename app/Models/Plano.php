@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,7 +28,7 @@ class Plano extends Model
         'valor_trimestral',        
         'valor_semestral',        
         'valor_anual'      
-    ];
+    ];    
 
     /**
      * Scopes
@@ -50,6 +51,21 @@ class Plano extends Model
     /**
      * Accerssors and Mutators
     */
+    protected function setHorarioAttribute($value)
+    {
+        
+        $this->attributes['horario'] = (!empty($value) ? Carbon::parse($value)->format('H:i') : null);
+        
+    }
+
+    public function getHorarioAttribute($value)
+    {
+        if (empty($value)) {
+            return null;
+        }
+        return date('H:i', strtotime($value));
+    }
+
     public function setValorMensalAttribute($value)
     {
         $this->attributes['valor_mensal'] = (!empty($value) ? floatval($this->convertStringToDouble($value)) : null);

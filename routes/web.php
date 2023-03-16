@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\{
     MenuController,
     NewsletterController,
     ParceiroController,
+    PedidoController,
     PlanoController,
     ReservaController,
     SitemapController,
@@ -194,7 +195,7 @@ Route::prefix('admin')->middleware('auth')->group( function(){
     Route::post('galerias/store', [GaleriaController::class, 'store'])->name('galerias.store');
     Route::get('/galerias', [GaleriaController::class, 'index'])->name('galerias.index');
 
-    /** Planos */
+    /******************** Planos *************************************************************/
     Route::match(['get', 'post'], 'planos/pesquisa', [PlanoController::class, 'search'])->name('planos.search');
     Route::get('planos/delete', [PlanoController::class, 'delete'])->name('planos.delete');
     Route::delete('planos/deleteon', [PlanoController::class, 'deleteon'])->name('planos.deleteon');
@@ -205,6 +206,14 @@ Route::prefix('admin')->middleware('auth')->group( function(){
     Route::post('planos/store', [PlanoController::class, 'store'])->name('planos.store');
     Route::get('planos', [PlanoController::class, 'index'])->name('planos.index');
 
+    //******************** Pedidos *************************************************************/
+    Route::get('pedidos/delete', [PedidoController::class, 'delete'])->name('pedidos.delete');
+    Route::delete('pedidos/deleteon', [PedidoController::class, 'deleteon'])->name('pedidos.deleteon');
+    Route::get('pedidos/show/{id}', [PedidoController::class, 'show'])->name('pedidos.show');
+    Route::get('pedidos/create', [PedidoController::class, 'create'])->name('pedidos.create');
+    Route::post('pedidos/store', [PedidoController::class, 'store'])->name('pedidos.store');
+    Route::get('pedidos', [PedidoController::class, 'index'])->name('pedidos.index');  
+    
     //******************** Sitemap *********************************************/
     Route::get('gerarxml', [SitemapController::class, 'gerarxml'])->name('gerarxml');
 

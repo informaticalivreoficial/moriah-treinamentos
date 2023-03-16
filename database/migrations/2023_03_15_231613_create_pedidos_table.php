@@ -14,8 +14,15 @@ class CreatePedidosTable extends Migration
     public function up()
     {
         Schema::create('pedidos', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->unsignedInteger('plano');
+            $table->unsignedInteger('user');
+            $table->integer('periodo')->nullable();
+
             $table->timestamps();
+
+            $table->foreign('plano')->references('id')->on('planos')->onDelete('CASCADE');
+            $table->foreign('user')->references('id')->on('users')->onDelete('CASCADE');
         });
     }
 
