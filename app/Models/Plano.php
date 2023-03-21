@@ -46,6 +46,10 @@ class Plano extends Model
     /**
      * Relacionamentos
     */
+    public function pedidos()
+    {
+        return $this->hasMany(Pedidos::class, 'plano', 'id');
+    }
     
 
     /**

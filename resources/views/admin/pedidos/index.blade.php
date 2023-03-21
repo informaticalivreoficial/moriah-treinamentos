@@ -3,17 +3,17 @@
 @section('title', 'Gerenciar Pedidos')
 
 @section('content_header')
-<div class="row mb-2">
-    <div class="col-sm-6">
-        <h1><i class="fas fa-search mr-2"></i> Pedidos</h1>
+    <div class="row mb-2">
+        <div class="col-sm-6">
+            <h1><i class="fas fa-search mr-2"></i> Pedidos</h1>
+        </div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">                    
+                <li class="breadcrumb-item"><a href="{{route('home')}}">Painel de Controle</a></li>
+                <li class="breadcrumb-item active">Pedidos</li>
+            </ol>
+        </div>
     </div>
-    <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-right">                    
-            <li class="breadcrumb-item"><a href="{{route('home')}}">Painel de Controle</a></li>
-            <li class="breadcrumb-item active">Pedidos</li>
-        </ol>
-    </div>
-</div>
 @stop
 
 @section('content')
@@ -56,9 +56,10 @@
             <table class="table table-bordered table-striped projects">
                 <thead>
                     <tr>
-                        <th class="text-center">Empresa</th>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Aluno</th>
                         <th class="text-center">Data</th>                        
-                        <th class="text-center">Valor</th>                        
+                        <th class="text-center">Período</th>                        
                         <th class="text-center">Status</th>
                         <th>Ações</th>
                     </tr>
@@ -66,12 +67,15 @@
                 <tbody>
                     @foreach($pedidos as $pedido)                    
                     <tr>
-                        <td>{{$pedido->getEmpresa->alias_name}}</td>                        
-                        <td class="text-center">{{Carbon\Carbon::parse($pedido->created_at)->format('d/m/Y')}}</td> 
-                        <td class="text-center">R$ {{str_replace(',00', '', $pedido->itensTotalValor())}}</td>                       
-                        <td class="text-center">{!!$pedido->getStatus()!!}</td> 
+                        <td>#{{$pedido->id}}</td>                        
+                        <td>{{$pedido->userObject->name}}</td> 
+                        <td class="text-center">{{\Carbon\Carbon::parse($pedido->created_at)->format('d/m/Y')}}</td>
+                        <td>{{$pedido->periodo}}</td>                       
+                        <td></td> 
                         <td>
+                            <a href="{{route('faturas.index',['pedido' => $pedido->id])}}" class="btn btn-xs btn-primary text-white"><i class="fas fa-list-alt"></i></a>
                             <a href="{{route('pedidos.show',['id' => $pedido->id])}}" class="btn btn-xs btn-info text-white"><i class="fas fa-search"></i></a>
+                            <a href="{{route('pedidos.edit',['id' => $pedido->id])}}" class="btn btn-xs btn-default"><i class="fas fa-pen"></i></a>
                             <button type="button" class="btn btn-xs btn-danger text-white j_modal_btn" data-id="{{$pedido->id}}" data-toggle="modal" data-target="#modal-default">
                                 <i class="fas fa-trash"></i>
                             </button>

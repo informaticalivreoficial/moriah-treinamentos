@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePedidosTable extends Migration
+class CreateContratosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,13 @@ class CreatePedidosTable extends Migration
      */
     public function up()
     {
-        Schema::create('pedidos', function (Blueprint $table) {
+        Schema::create('contratos', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('plano');
             $table->unsignedInteger('user');
-            $table->integer('periodo')->nullable();
-            $table->string('vencimento');
             $table->integer('status')->nullable();
-
+            
             $table->timestamps();
 
-            $table->foreign('plano')->references('id')->on('planos')->onDelete('CASCADE');
             $table->foreign('user')->references('id')->on('users')->onDelete('CASCADE');
         });
     }
@@ -35,6 +31,6 @@ class CreatePedidosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pedidos');
+        Schema::dropIfExists('contratos');
     }
 }

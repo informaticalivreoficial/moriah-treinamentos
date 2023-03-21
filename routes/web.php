@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\{
     CatPostController,
     ConfigController,
     EmpresaController,
+    FaturaController,
     GaleriaController,
     MenuController,
     NewsletterController,
@@ -207,12 +208,19 @@ Route::prefix('admin')->middleware('auth')->group( function(){
     Route::get('planos', [PlanoController::class, 'index'])->name('planos.index');
 
     //******************** Pedidos *************************************************************/
+    Route::match(['post', 'get'], 'pedidos/fetchCity', [PedidoController::class, 'fetchPlan'])->name('pedidos.fetchPlan');
     Route::get('pedidos/delete', [PedidoController::class, 'delete'])->name('pedidos.delete');
     Route::delete('pedidos/deleteon', [PedidoController::class, 'deleteon'])->name('pedidos.deleteon');
+    Route::put('pedidos/{id}', [PedidoController::class, 'update'])->name('pedidos.update');
+    Route::get('pedidos/{id}/edit', [PedidoController::class, 'edit'])->name('pedidos.edit');
     Route::get('pedidos/show/{id}', [PedidoController::class, 'show'])->name('pedidos.show');
     Route::get('pedidos/create', [PedidoController::class, 'create'])->name('pedidos.create');
     Route::post('pedidos/store', [PedidoController::class, 'store'])->name('pedidos.store');
-    Route::get('pedidos', [PedidoController::class, 'index'])->name('pedidos.index');  
+    Route::get('pedidos', [PedidoController::class, 'index'])->name('pedidos.index'); 
+    
+    //******************** Faturas *************************************************************/
+    Route::get('faturas/{pedido}', [FaturaController::class, 'index'])->name('faturas.index');
+    Route::post('faturas/gerarboleto', [FaturaController::class, 'gerarBoleto'])->name('faturas.gerarBoleto');
     
     //******************** Sitemap *********************************************/
     Route::get('gerarxml', [SitemapController::class, 'gerarxml'])->name('gerarxml');

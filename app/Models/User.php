@@ -85,9 +85,9 @@ class User extends Authenticatable
         return $this->hasMany(Post::class, 'autor', 'id');
     }
 
-    public function reservas()
+    public function pedidos()
     {
-        return $this->hasMany(Reservas::class, 'cliente', 'id');
+        return $this->hasMany(Pedidos::class, 'user', 'id');
     }
 
     /**
