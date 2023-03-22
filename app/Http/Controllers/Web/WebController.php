@@ -198,12 +198,7 @@ class WebController extends Controller
         $post->views = $post->views + 1;
         $post->save();
 
-        $postsMais = Post::orderBy('views', 'DESC')
-                ->where('id', '!=', $post->id)
-                ->where('tipo', 'pagina')
-                ->limit(3)
-                ->postson()
-                ->get();
+        $postsTags = Post::where('tipo', '=', 'pagina')->orWhere('id', '!=', $post->id)->postson()->limit(3)->get();
 
         $head = $this->seo->render($post->titulo ?? 'Informática Livre',
             $post->titulo,
@@ -214,7 +209,7 @@ class WebController extends Controller
         return view('web.'.$this->configService->getConfig()->template.'.pagina', [
             'head' => $head,
             'post' => $post,
-            'postsMais' => $postsMais
+            'postsTags' => $postsTags
         ]);
     }    
     

@@ -44,6 +44,12 @@
     <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->  
+
+    <div class="progress-wrap active-progress">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+           <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 4.95218;"></path>
+        </svg>
+     </div>
       
     <header class="top-nav">
         <div class="top-address d-none d-lg-block">
@@ -346,6 +352,7 @@
                             </div>
                         </div> 
                         <div class="col-lg-3 col-md-6 col-sm-12">
+                            {{--
                             <div class="footer-widget wow fadeInUp mb-40" data-wow-delay="1.3s">
                             <h5 class="fotter_widget-title mb-35">Recent Post</h5>
                             <div class="footer__blog">
@@ -386,7 +393,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            </div>
+                            </div>--}}
                         </div>
                     </div>
                 </div>
@@ -398,8 +405,8 @@
                             <p>© {{$configuracoes->ano_de_inicio}} - {{date('Y')}} {{$configuracoes->nomedosite}} - Todos os direitos reservados.</p>
                         </div>
                         <div class="copy-right_useful_link">
-                            <a href="{{route('web.galerias')}}" title="Galerias">Galerias</a> 
-                            <a href="{{route('web.atendimento')}}" title="Atendimento">Atendimento</a>                          
+                            <a href="{{route('web.galerias')}}" title="Galerias">Galerias</a> -  
+                            <a href="{{route('web.atendimento')}}" title="Atendimento">Atendimento</a> -                          
                             <a href="{{route('web.politica')}}" title="Política de Privacidade">Política de Privacidade</a> 
                         </div>
                     </div>

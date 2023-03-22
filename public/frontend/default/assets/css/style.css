@@ -418,7 +418,7 @@ textarea:focus {
   background: #FFF600;
   font-family: "Teko", sans-serif;
   font-size: 18px;
-  color: #ffffff;
+  color: #333;
   display: inline-block;
   font-weight: 500;
   text-transform: uppercase;
@@ -437,7 +437,7 @@ textarea:focus {
 }
 .tp-btn-round:hover {
   background: #ffffff;
-  color: #FFF600;
+  color: #333;
   border-color: #FFF600;
 }
 
