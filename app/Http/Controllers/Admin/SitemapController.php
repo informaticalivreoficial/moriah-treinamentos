@@ -53,10 +53,10 @@ class SitemapController extends Controller
             endforeach; 
         }
 
-        $sitemap->add('/acomodacoes');
-        $sitemap->add('/reservar');
+        //$sitemap->add('/acomodacoes');
+        //$sitemap->add('/reservar');
         $sitemap->add('/politica-de-privacidade');
-        $sitemap->add('/galerias');
+        //$sitemap->add('/galerias');
         $sitemap->writeToDisk('s3', Str::slug($configupdate->nomedosite) . '_sitemap.xml');        
         
         return response()->json(['success' => true]);

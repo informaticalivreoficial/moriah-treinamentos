@@ -309,7 +309,7 @@
                                     @if($configuracoes->rua)
                                         <li class="d-flex align-items-start pt-5 mb-20">
                                             <div class="footer__info-icon mr-20">
-                                            <i class="fas fa-map-marker-alt"></i>
+                                                <i class="fas fa-map-marker-alt"></i>
                                             </div>
                                             <div class="footer__info-text" style="color: #ffffff;">
                                                 <a href="javascript:void(0)">
@@ -334,19 +334,23 @@
                                             </div>
                                             <div class="footer__info-text">
                                                 <span>Email:</span>
-                                                <a href="mailto:{{$configuracoes->email}}"><span class="__cf_email__" >{{$configuracoes->email}}</span></a>
+                                                <a href="mailto:{{$configuracoes->email}}">
+                                                    <span class="__cf_email__" >{{$configuracoes->email}}</span>
+                                                </a>
                                             </div>
                                         </li>
                                     @endif
-                                    <li class="d-flex align-items-start mb-20">
-                                        <div class="footer__info-icon mr-20">
-                                        <i class="fas fa-phone-alt"></i>
-                                        </div>
-                                        <div class="footer__info-text">
-                                        <span>Phone:</span>
-                                        <a href="tel:+012-345-6789">+012 (344) 678 99</a>
-                                        </div>
-                                    </li>
+                                    @if ($configuracoes->telefone1)
+                                        <li class="d-flex align-items-start mb-20">
+                                            <div class="footer__info-icon mr-20">
+                                            <i class="fas fa-phone-alt"></i>
+                                            </div>
+                                            <div class="footer__info-text">
+                                            <span>Phone:</span>
+                                            <a href="tel:{{$configuracoes->telefone1}}">{{$configuracoes->telefone1}}</a>
+                                            </div>
+                                        </li>
+                                    @endif                                    
                                 </ul>
                             </div>
                             </div>
@@ -405,9 +409,15 @@
                             <p>© {{$configuracoes->ano_de_inicio}} - {{date('Y')}} {{$configuracoes->nomedosite}} - Todos os direitos reservados.</p>
                         </div>
                         <div class="copy-right_useful_link">
-                            <a href="{{route('web.galerias')}}" title="Galerias">Galerias</a> -  
                             <a href="{{route('web.atendimento')}}" title="Atendimento">Atendimento</a> -                          
                             <a href="{{route('web.politica')}}" title="Política de Privacidade">Política de Privacidade</a> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mt-3">
+                            <p class="font-accent text-center">
+                                <span class="small text-silver-dark">Feito com <i style="color:red;" class="fa fa-heart"></i> por <a target="_blank" href="{{env('DESENVOLVEDOR_URL')}}">{{env('DESENVOLVEDOR')}}</a></span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -423,26 +433,6 @@
             </div>
         </div>
     </footer>
-    <!-- footer-area-end -->
-
-
-      <!-- modal-search-start -->
-      <div class="modal fade" id="search-modal" tabindex="-1" role="dialog" aria-hidden="true">
-         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-         </button>
-         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-               <form>
-                     <input type="text" placeholder="Search here...">
-                     <button>
-                        <i class="fa fa-search"></i>
-                     </button>
-               </form>
-            </div>
-         </div>
-      </div>
-      <!-- modal-search-end -->
 
     <!-- JS here -->
     <script src="{{url('frontend/'.$configuracoes->template.'/assets/js/vendor/jquery-3.6.0.min.js')}}"></script>
