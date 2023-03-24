@@ -56,7 +56,7 @@
 @endif
 
  
- <!-- tp-about-area-start -->
+ <!-- tp-about-area-start 
  <div class="tp-about-area pb-95 pt-80">
     <div class="container">
        <div class="row">
@@ -108,7 +108,7 @@
        <img src="assets/img/about/about-bg-png.png" alt="" class="img-fluid">
     </div>
  </div>
- <!-- tp-about-area-end -->
+-->
 
 
  {{-- tpcounter-area 
@@ -182,7 +182,7 @@
  </div>
   --}}
 
- <!-- fitness-gallery-area-start -->
+ <!-- fitness-gallery-area-start 
  <div class="fitness-gallery-area">
     <div class="container">
        <div class="wow fadeInUp" data-wow-delay=".2s">
@@ -291,9 +291,9 @@
        </div>
     </div>
  </div>
- <!-- fitness-gallery-area-end -->
+  -->
 
- <!-- schedule-area-start -->
+ <!-- schedule-area-start 
  <div class="schedule-area pb-110">
     <div class="container custome-container">
        <div class="section-wrap-two text-center">
@@ -398,9 +398,9 @@
 
     </div>
  </div>
- <!-- schedule-area-end --> 
+  --> 
 
- <!-- choose-us-area-start -->
+ <!-- choose-us-area-start 
  <div class="choose-us-area pt-120 pb-65">
     <div class="container">
        <div class="row justify-content-center">
@@ -454,9 +454,9 @@
        </div>
     </div>
  </div>
- <!-- choose-us-area-end -->
+  -->
 
- <!-- trainer-area-start -->
+ <!-- 
  <div class="trainer-area pb-150">
     <div class="container">
        <div class="row justify-content-center">
@@ -553,7 +553,7 @@
        </div>
     </div>
  </div>
- <!-- trainer-area-end -->
+  -->
  
 @endsection
 
