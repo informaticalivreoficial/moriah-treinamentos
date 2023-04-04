@@ -15,7 +15,10 @@ class FaturaController extends Controller
 
     public function gerarBoleto()
     {
-        $paghiper = new PagHiper('apk_47471634-czZLxKaXvGIlUjremsKCGrZCNUJmLhZo', 'B5R7OTL4K4LR20ONVNPDBKXWEFIKGACTTRRLET4W967M');
+        $paghiper = new PagHiper(
+            env('PAGHIPER_APIKEY'), 
+            env('PAGHIPER_TOKEM')
+        );
         $transaction = $paghiper->billet()->create([
             'order_id' => 'ABC-456-789',
             'payer_name' => 'Pedro Lima',
@@ -34,7 +37,10 @@ class FaturaController extends Controller
 
     public function cancelaBoleto()
     {
-        $paghiper = new PagHiper('apk_47471634-czZLxKaXvGIlUjremsKCGrZCNUJmLhZo', 'B5R7OTL4K4LR20ONVNPDBKXWEFIKGACTTRRLET4W967M');
+        $paghiper = new PagHiper(
+            env('PAGHIPER_APIKEY'), 
+            env('PAGHIPER_TOKEM')
+        );
         $transaction = $paghiper->billet()->cancel('03UTF9C1LRZAPM23');
     }
 }
