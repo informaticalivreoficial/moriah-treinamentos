@@ -190,23 +190,27 @@
                                     </a>
                                 </div>
                             </li>
+                        @endif 
+                        @if($configuracoes->telefone1)
+                            <li class="d-flex align-items-center">
+                                <div class="sidebar__contact-icon mr-15">
+                                <i class="far fa-phone"></i>
+                                </div>
+                                <div class="sidebar__contact-text">
+                                <a href="tel:{{$configuracoes->telefone1}}">{{$configuracoes->telefone1}}</a>
+                                </div>
+                            </li>                           
+                        @endif                       
+                        @if ($configuracoes->email)
+                            <li class="d-flex align-items-center">
+                                <div class="sidebar__contact-icon mr-15">
+                                <i class="fal fa-envelope"></i>
+                                </div>
+                                <div class="sidebar__contact-text">
+                                <a href="mailto:{{$configuracoes->email}}"><span class="__cf_email__">{{$configuracoes->email}}</span></a>
+                                </div>
+                            </li>
                         @endif                        
-                        <li class="d-flex align-items-center">
-                            <div class="sidebar__contact-icon mr-15">
-                            <i class="far fa-phone"></i>
-                            </div>
-                            <div class="sidebar__contact-text">
-                            <a href="tel:+012-345-6789">088889797697</a>
-                            </div>
-                        </li>
-                        <li class="d-flex align-items-center">
-                            <div class="sidebar__contact-icon mr-15">
-                            <i class="fal fa-envelope"></i>
-                            </div>
-                            <div class="sidebar__contact-text">
-                            <a href="/cdn-cgi/l/email-protection#7c0f090c0c130e083c1b111d1510521f1311"><span class="__cf_email__" data-cfemail="5d2e282d2d322f291d303c3431733e3230">[email&#160;protected]</span></a>
-                            </div>
-                        </li>
                     </ul>
                 </div>
                 <div class="sidebar__social">

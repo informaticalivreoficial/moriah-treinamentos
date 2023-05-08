@@ -8,7 +8,7 @@
             <div class="hero-pagination"></div>
             @foreach ($slides as $key => $slide)  
                 <div class="item-slider swiper-slide">
-                    <div class="slide-bg" data-background="{{$slide->getimagem()}}"></div>
+                    <div class="slide-bg img-slide" data-background="{{$slide->getimagem()}}"></div>
                     <div class="container">
                         <div class="row ">
                             <div class="col-lg-12">
