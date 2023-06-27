@@ -226,79 +226,6 @@ class WebController extends Controller
         ]);
     }
 
-    public function acomodacoes()
-    {
-        $acomodacoes = Apartamento::available()->get();
-        $head = $this->seo->render('Acomodações - ' . $this->configService->getConfig()->nomedosite,
-            $this->configService->getConfig()->descricao ?? 'Informática Livre desenvolvimento de sistemas web desde 2005',
-            route('web.acomodacoes'),
-            $this->configService->getConfig()->getMetaImg() ?? 'https://informaticalivre.com/media/metaimg.jpg'
-        );
-        return view('web.'.$this->configService->getConfig()->template.'.acomodacoes.index',[
-            'head' => $head,
-            'acomodacoes' => $acomodacoes
-        ]);
-    }
-
-    public function reservar(Request $request)
-    {
-        $dadosForm = $request->all();
-        $acomodacoes = Apartamento::available()->get();
-
-        $paginareserva = Post::where('id', 15)->first();
-        $politicareserva = Post::where('id', 14)->first();
-        $paginareserva->views = $paginareserva->views + 1;
-        $paginareserva->save();
-
-        $head = $this->seo->render('Pré-reserva - ' . $this->configService->getConfig()->nomedosite,
-            'Pré-reserva - ' . $this->configService->getConfig()->nomedosite,
-            route('web.reservar'),
-            $this->configService->getConfig()->getMetaImg() ?? 'https://informaticalivre.com/media/metaimg.jpg'
-        );
-        
-        return view('web.'.$this->configService->getConfig()->template.'.acomodacoes.reservar',[
-            'head' => $head,
-            'dadosForm' => $dadosForm,
-            'acomodacoes' => $acomodacoes,
-            'paginareserva' => $paginareserva,
-            'politicareserva' => $politicareserva,
-            'estados' => $this->estadoService->getEstados()
-        ]);
-    }
-
-    public function acomodacao($slug)
-    {
-        $acomodacao = Apartamento::where('slug', $slug)->available()->first();
-        $acomodacoes = Apartamento::where('id', '!=', $acomodacao->id)->available()->get();
-
-        $postsTags = Post::orderBy('views', 'DESC')
-            ->where('tags', '!=', '')
-            ->where('id', '!=', $acomodacao->id)
-            ->postson()
-            ->limit(11)
-            ->get();
-
-        $acomodacao->views = $acomodacao->views + 1;
-        $acomodacao->save();
-
-        $paginareserva = Post::where('id', 5)->first();
-        $paginareserva->views = $paginareserva->views + 1;
-        $paginareserva->save();
-
-        $head = $this->seo->render($acomodacao->titulo . ' - ' . $this->configService->getConfig()->nomedosite,
-            $acomodacao->descricao ?? 'Informática Livre desenvolvimento de sistemas web desde 2005',
-            route('web.acomodacao', ['slug' => $acomodacao->slug]),
-            $this->configService->getConfig()->getMetaImg() ?? 'https://informaticalivre.com/media/metaimg.jpg'
-        );
-        return view('web.'.$this->configService->getConfig()->template.'.acomodacoes.acomodacao',[
-            'head' => $head,
-            'acomodacao' => $acomodacao,
-            'acomodacoes' => $acomodacoes,
-            'postsTags' => $postsTags,
-            'estados' => $this->estadoService->getEstados()
-        ]);
-    }
-
     public function avaliacaoCliente(Request $request)
     {
         $head = $this->seo->render('Questionário de avaliação - ' . $this->configService->getConfig()->nomedosite,
@@ -356,5 +283,27 @@ class WebController extends Controller
         $textoZap = $request->texto;
         $link = \App\Helpers\WhatsApp::getNumZap($this->configService->getConfig()->whatsapp, $textoZap);
         return redirect($link);
+    }
+
+    public function enqueteM()
+    {
+        $head = $this->seo->render('Enquete Arraiá Moriah 2023' . $this->configService->getConfig()->nomedosite,
+        'Enquete Arraiá Moriah 2023',
+            route('web.enqueteM'),
+            $this->configService->getConfig()->getMetaImg() ?? 'https://informaticalivre.com/media/metaimg.jpg'
+        );
+
+        return view('web.'.$this->configService->getConfig()->template.'.enquetemasculino');
+    }
+
+    public function enqueteF()
+    {
+        $head = $this->seo->render('Enquete Arraiá Moriah 2023 feminino' . $this->configService->getConfig()->nomedosite,
+        'Enquete Arraiá Moriah 2023 feminino',
+            route('web.enqueteF'),
+            $this->configService->getConfig()->getMetaImg() ?? 'https://informaticalivre.com/media/metaimg.jpg'
+        );
+
+        return view('web.'.$this->configService->getConfig()->template.'.enquetefeminino');
     }
 }

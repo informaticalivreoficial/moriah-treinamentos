@@ -75,6 +75,9 @@ Route::group(['namespace' => 'Web', 'as' => 'web.'], function () {
     Route::get('/politica-de-privacidade', [WebController::class, 'politica'])->name('politica');
     Route::get('/sitemap', [WebController::class, 'sitemap'])->name('sitemap');
 
+    Route::get('/enquetemasculino', [WebController::class, 'enqueteM'])->name('enqueteM');
+    Route::get('/enquetefeminino', [WebController::class, 'enqueteF'])->name('enqueteF');
+
 });
 
 Route::prefix('admin')->middleware('auth')->group( function(){

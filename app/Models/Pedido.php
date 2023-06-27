@@ -53,6 +53,19 @@ class Pedido extends Model
     /**
      * Accerssors and Mutators
     */
+    public function getPeriodo()
+    {
+        if($this->periodo == 1){
+            return 'Mensal';
+        }elseif($this->periodo == 3){
+            return 'Trimestral';
+        }elseif($this->periodo == 6){
+            return 'Semestral';
+        }elseif($this->periodo == 12){
+            return 'Anual';
+        }
+    }
+    
     public function setStatusAttribute($value)
     {
         $this->attributes['status'] = ($value == '1' ? 1 : 0);

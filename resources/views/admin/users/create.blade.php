@@ -281,7 +281,7 @@
                                                     <div class="col-12 col-md-6 col-lg-4"> 
                                                         <div class="form-group">
                                                             <label class="labelforms text-muted"><b>E-mail Alternativo:</b></label>
-                                                            <input type="text" autocomplete="off" class="form-control" placeholder="Email Alternativo" name="email1" value="{{old('email1')}}">
+                                                            <input type="text" class="form-control" placeholder="Email Alternativo" name="email1" value="{{old('email1')}}">
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-md-6 col-lg-4"> 

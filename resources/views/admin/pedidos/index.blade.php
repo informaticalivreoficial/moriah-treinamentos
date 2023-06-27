@@ -60,18 +60,18 @@
                         <th class="text-center">Aluno</th>
                         <th class="text-center">Data</th>                        
                         <th class="text-center">Período</th>                        
-                        <th class="text-center">Status</th>
+                        <th class="text-center">Plano</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($pedidos as $pedido)                    
                     <tr>
-                        <td>#{{$pedido->id}}</td>                        
+                        <td>{{$pedido->id}}</td>                        
                         <td>{{$pedido->userObject->name}}</td> 
                         <td class="text-center">{{\Carbon\Carbon::parse($pedido->created_at)->format('d/m/Y')}}</td>
-                        <td>{{$pedido->periodo}}</td>                       
-                        <td></td> 
+                        <td class="text-center">{{$pedido->getPeriodo()}}</td>                       
+                        <td>{{$pedido->planoObject->name}} - {{$pedido->planoObject->horario}}</td> 
                         <td>
                             <a href="{{route('faturas.index',['pedido' => $pedido->id])}}" class="btn btn-xs btn-primary text-white"><i class="fas fa-list-alt"></i></a>
                             <a href="{{route('pedidos.show',['id' => $pedido->id])}}" class="btn btn-xs btn-info text-white"><i class="fas fa-search"></i></a>

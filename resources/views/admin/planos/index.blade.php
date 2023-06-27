@@ -68,7 +68,7 @@
                         <tr style="{{ ($plano->status == '1' ? '' : 'background: #fffed8 !important;')  }}">
                             <td>{{$plano->name}}</td>
                             <td class="text-center">{{\Carbon\Carbon::parse($plano->horario)->format('H:i')}}</td>
-                            <td class="text-center"></td>
+                            <td class="text-center">{{$plano->vagas}}</td>
                             <td class="text-center">                            
                                 {{($plano->valor_mensal ? 'Mensal: R$'.$plano->valor_mensal : '')}}
                                 {!!($plano->valor_trimestral ? '<br>Trimestral: R$'.$plano->valor_trimestral : '')!!}
