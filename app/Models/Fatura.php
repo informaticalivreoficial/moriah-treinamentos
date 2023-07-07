@@ -37,6 +37,15 @@ class Fatura extends Model
     /**
      * Relacionamentos
     */
+    public function pedidoObject()
+    {
+        return $this->hasOne(Pedido::class, 'id', 'pedido');
+    }
+
+    public function userObject()
+    {
+        return $this->hasOne(User::class, 'id', 'user');
+    }
 
     /**
      * Accerssors and Mutators

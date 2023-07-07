@@ -8,6 +8,7 @@ use App\Models\Fatura;
 use App\Models\Pedido;
 use App\Models\Plano;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -23,9 +24,11 @@ class PedidoController extends Controller
 
     public function create()
     {
+        $planos = Plano::orderBy('created_at', 'DESC')->available()->get();
         $alunos = User::orderBy('created_at', 'DESC')->available()->where('client', '=', '1')->get();
         return view('admin.pedidos.create', [
-            'alunos' => $alunos
+            'alunos' => $alunos,
+            'planos' => $planos
         ]);
     }
 
@@ -46,21 +49,56 @@ class PedidoController extends Controller
         //Cria Fatura
         if($request->gerarfatura === 'on'){
             $plano = Plano::where('id', $request->plano)->first();
-            $dataFatura = [
-                'pedido' => $criarPedido->id,
-                'vencimento' => date('Y-m-d', strtotime("+{$request->vencimento} days")),
-                'user' => $request->user,
-                'valor' => ($request->periodo == 1 ? $plano->valor_mensal : ''),
-                'status' => 'pending'
+            $vencimento = strtotime(Carbon::createFromFormat('d/m/Y',  $request->vencimento));
+
+            $dado = [
+                'pedido'     => $criarPedido->id,
+                'user'       => $request->user,
+                'valor'      => ($request->periodo == 1 ? $plano->valor_mensal : null),
+                'vencimento' => date('Y-m-d', $vencimento),
+                'status'     => 'pending'
             ];
-            $criarFatura = Fatura::create($dataFatura);
+
+            $criarFatura = Fatura::create($dado);
             $criarFatura->save();
+            
+            foreach(range(2, $request->periodo) as $parcela){
+                $vencimento = strtotime('+30 days', $vencimento);
+                $dados[] = [
+                    'pedido'     => $criarPedido->id,
+                    'user'       => $request->user,
+                    'valor'      => ($request->periodo == 1 ? $plano->valor_mensal : null),
+                    'vencimento' => date('Y-m-d', $vencimento),
+                    'status'     => 'pending',
+                    'created_at' => now()
+                ]; 
+                
+            }     
+            $criarFaturas = Fatura::insert($dados);
         }
                       
         return Redirect::route('pedidos.edit', [
             'id' => $criarPedido->id,
         ])->with(['color' => 'success', 'message' => 'Pedido cadastrado com sucesso!']);
     }
+
+    // private function criarFaturas($num_faturas = 6, $pedido = null, $user = null, $valor)
+    // {
+    //     $faturas = [];
+
+    //     for ( $x = 1; $num_faturas <= 6; $x++) {
+    //         $dataFatura = [
+    //             'pedido' => $pedido,
+    //             'vencimento' => date('Y-m-d', strtotime("+30 days")),
+    //             'user' => $user,
+    //             'valor' => $valor,
+    //             'status' => 'pending'
+    //         ];
+
+    //         array_push($faturas, [$dataFatura]);
+    //     }
+    //     dd($faturas);
+    // }
 
     public function edit($id)
     {

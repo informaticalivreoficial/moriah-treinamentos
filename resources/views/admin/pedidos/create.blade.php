@@ -31,7 +31,7 @@
 </div>   
                     
             
-<form action="{{ route('pedidos.store') }}" method="post">
+<form action="{{ route('pedidos.store') }}" method="post" autocomplete="off">
     @csrf          
     <div class="row">            
         <div class="col-12">
@@ -63,6 +63,7 @@
                                 <div class="col-12 col-md-6 col-lg-5"> 
                                     <div class="form-group">
                                         <label class="labelforms text-muted"><b>*Plano</b> </label>
+                                        
                                         <input type="hidden" id="getPlanId" name="plano" value="{{ old('plano')}}">                                        
                                         <input type="text" class="form-control" id="getPlan" name="plan" value="{{ old('plan')}}">                                        
                                     </div>
@@ -83,8 +84,13 @@
                             <div class="row mb-2">
                                 <div class="col-12 col-md-6 col-lg-3"> 
                                     <div class="form-group">
-                                        <label class="labelforms text-muted"><b>*Dia de Vencimento</b></label>
-                                        <input type="text" class="form-control" name="vencimento" value="{{ old('vencimento')}}">
+                                        <label class="labelforms text-muted"><b>*Primeira Mensalidade</b></label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control datepicker-here" data-language='pt-BR' name="vencimento" value="{{ old('vencimento') ?? date('d/m/Y')}}">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
                                     </div>                                                    
                                 </div>   
                                 <div class="col-12 col-sm-6 col-md-4 col-lg-2">                                        
@@ -122,10 +128,12 @@
 @stop
 
 @section('css')
-
+<link href="{{url(asset('backend/plugins/airdatepicker/css/datepicker.min.css'))}}" rel="stylesheet" type="text/css">
 @stop
 
 @section('js')
+<script src="{{url(asset('backend/plugins/airdatepicker/js/datepicker.min.js'))}}"></script>
+<script src="{{url(asset('backend/plugins/airdatepicker/js/i18n/datepicker.pt-BR.js'))}}"></script>
     <script src="{{url(asset('backend/assets/js/jquery.mask.js'))}}"></script>
     <script>
         $(document).ready(function () { 
