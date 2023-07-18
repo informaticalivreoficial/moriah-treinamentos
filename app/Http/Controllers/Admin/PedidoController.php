@@ -11,6 +11,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use WebMaster\PagHiper\PagHiper;
 
 class PedidoController extends Controller
 {
@@ -50,13 +51,18 @@ class PedidoController extends Controller
         if($request->gerarfatura === 'on'){
             $plano = Plano::where('id', $request->plano)->first();
             $vencimento = strtotime(Carbon::createFromFormat('d/m/Y',  $request->vencimento));
-
+            $valor_fatura = ($request->periodo == 1 ? $plano->valor_mensal : 
+                            ($request->periodo == 3 ? $plano->valor_trimestral : 
+                            ($request->periodo == 6 ? $plano->valor_semestral : 
+                            ($request->periodo == 12 ? $plano->valor_anual : null))));
+                            
             $dado = [
                 'pedido'     => $criarPedido->id,
                 'user'       => $request->user,
-                'valor'      => ($request->periodo == 1 ? $plano->valor_mensal : null),
+                'valor'      => $valor_fatura,
                 'vencimento' => date('Y-m-d', $vencimento),
-                'status'     => 'pending'
+                'status'     => 'pending',
+                'created_at' => now()
             ];
 
             $criarFatura = Fatura::create($dado);
@@ -67,7 +73,7 @@ class PedidoController extends Controller
                 $dados[] = [
                     'pedido'     => $criarPedido->id,
                     'user'       => $request->user,
-                    'valor'      => ($request->periodo == 1 ? $plano->valor_mensal : null),
+                    'valor'      => str_replace(',', '.', str_replace('.', '', $valor_fatura)),
                     'vencimento' => date('Y-m-d', $vencimento),
                     'status'     => 'pending',
                     'created_at' => now()
@@ -82,31 +88,11 @@ class PedidoController extends Controller
         ])->with(['color' => 'success', 'message' => 'Pedido cadastrado com sucesso!']);
     }
 
-    // private function criarFaturas($num_faturas = 6, $pedido = null, $user = null, $valor)
-    // {
-    //     $faturas = [];
-
-    //     for ( $x = 1; $num_faturas <= 6; $x++) {
-    //         $dataFatura = [
-    //             'pedido' => $pedido,
-    //             'vencimento' => date('Y-m-d', strtotime("+30 days")),
-    //             'user' => $user,
-    //             'valor' => $valor,
-    //             'status' => 'pending'
-    //         ];
-
-    //         array_push($faturas, [$dataFatura]);
-    //     }
-    //     dd($faturas);
-    // }
-
     public function edit($id)
     {
-        $alunos = User::orderBy('created_at', 'DESC')->available()->where('client', '=', '1')->get();
-        $pedido = Pedido::where('id', $id)->first();        
+        $pedido = Pedido::where('id', $id)->first(); 
         return view('admin.pedidos.edit', [
-            'pedido' => $pedido,
-            'alunos' => $alunos
+            'pedido' => $pedido
         ]);
     }
 
@@ -115,5 +101,50 @@ class PedidoController extends Controller
         $aluno = User::where('id', $request->aluno_id)->first();
         $data['plano'] = Plano::where("id", $aluno->plano)->get(["name", "id"]);
         return response()->json($data);
+    }
+
+    public function pagar($fatura)
+    {
+        $fatura = Fatura::where('id', $fatura)->first();
+        $data = [
+            'order_id' => $fatura->id,
+            'payer_name' => $fatura->userObject->name,
+            'payer_email' => $fatura->userObject->email,
+            'payer_cpf_cnpj' => $fatura->userObject->cpf,
+            'days_due_date' => Carbon::parse($fatura->vencimento)->diffInDays(Carbon::parse(Carbon::now())),
+            'type_bank_slip' => 'boletoa4',
+            'items' => [
+                [
+                    'item_id' => 1,
+                    'description' => $fatura->pedidoObject->planoObject->name,
+                    'quantity' => 1,
+                    'price_cents' => str_replace(',', '.', str_replace('.', '', $fatura->valor))
+                ]
+            ]
+        ];  
+        $this->gerarBoleto($data);
+    }
+
+    public function gerarBoleto($data)
+    {
+        $paghiper = new PagHiper(
+            env('PAGHIPER_APIKEY'), 
+            env('PAGHIPER_TOKEM')
+        );
+        $transaction = $paghiper->billet()->create($data);
+        
+        if(!empty($transaction) && $transaction['result'] == 'success'){
+            $fatura = Fatura::where('id', $transaction['order_id'])->first();
+            $fatura->transaction_id = $transaction['transaction_id'];
+            $fatura->status = $transaction['status'];
+            $fatura->valor = $transaction['value_cents'];
+            $fatura->url_slip = $transaction['bank_slip']['url_slip'];
+            $fatura->digitable_line = $transaction['bank_slip']['digitable_line'];
+            $fatura->vencimento = $transaction['due_date'];
+            $fatura->save();
+        }
+
+        return Redirect::to($transaction['bank_slip']['url_slip']);
+        
     }
 }

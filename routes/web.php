@@ -35,6 +35,10 @@ Route::group(['namespace' => 'Web', 'as' => 'web.'], function () {
     Route::get('/', [WebController::class, 'home'])->name('home');
     Route::match(['post', 'get'], '/fetchCity', [WebController::class, 'fetchCity'])->name('fetchCity');
 
+    //Pagamentos
+    Route::get('pagar/{fatura}', [PedidoController::class, 'pagar'])->name('pagar');
+    Route::post('notification/pagHiper', [PedidoController::class, 'getTransaction'])->name('getTransaction');
+
     //**************************** Emails ********************************************/
     Route::match(['post', 'get'], '/avaliacao', [WebController::class, 'avaliacaoCliente'])->name('avaliacao');
     Route::get('/avaliacaoSend', [SendEmailController::class, 'avaliacaoSend'])->name('avaliacaoSend');

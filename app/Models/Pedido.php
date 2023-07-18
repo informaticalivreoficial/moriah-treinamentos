@@ -50,6 +50,11 @@ class Pedido extends Model
         return $this->hasMany(Fatura::class, 'pedido', 'id')->count();
     }
 
+    public function faturas()
+    {
+        return $this->hasMany(Fatura::class, 'pedido', 'id')->orderBy('vencimento', 'ASC');
+    }
+
     /**
      * Accerssors and Mutators
     */

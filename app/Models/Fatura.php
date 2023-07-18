@@ -14,6 +14,7 @@ class Fatura extends Model
     protected $fillable = [
         'transaction_id',
         'paid_date',
+        'form_sendat',
         'vencimento',
         'pedido',
         'user',
@@ -50,6 +51,22 @@ class Fatura extends Model
     /**
      * Accerssors and Mutators
     */
+    public function getStatus() {
+        if($this->status == 'processing'){
+            return '<small class="badge badge-warning">Em Análise</small>';
+        }elseif($this->status == 'pending'){
+            return '<small class="badge badge-primary">Aguardando Pagamento</small>';
+        }elseif($this->status == 'canceled'){
+            return '<small class="badge badge-danger">Cancelado</small>';
+        }elseif($this->status == 'paid'){
+            return '<small class="badge badge-success">Pago</small>';
+        }elseif($this->status == 'completed'){
+            return '<small class="badge badge-info">Finalizado</small>'; 
+        }else{
+            return '<small class="badge badge-warning">Em Análise</small>'; 
+        }
+    }
+    
     public function setValorAttribute($value)
     {
         $this->attributes['valor'] = (!empty($value) ? floatval($this->convertStringToDouble($value)) : null);

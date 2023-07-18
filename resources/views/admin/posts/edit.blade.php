@@ -190,15 +190,15 @@ $config = [
                                         
                                         <div class="property_image">
                                             @foreach($post->images()->get() as $image)
-                                            <div class="property_image_item">
-                                                <a href="{{ $image->getUrlImageAttribute() }}" data-toggle="lightbox" data-gallery="property-gallery" data-type="image">
-                                                <img src="{{ $image->url_cropped }}" alt="">
-                                                </a>
-                                                <div class="property_image_actions">
-                                                    <a href="javascript:void(0)" class="btn btn-xs {{ ($image->cover == true ? 'btn-success' : 'btn-default') }} icon-notext image-set-cover px-2" data-action="{{ route('posts.imageSetCover', ['image' => $image->id]) }}"><i class="nav-icon fas fa-check"></i> </a>
-                                                    <a href="javascript:void(0)" class="btn btn-danger btn-xs image-remove px-2" data-action="{{ route('posts.imageRemove', ['image' => $image->id]) }}"><i class="nav-icon fas fa-times"></i> </a>
+                                                <div class="property_image_item">
+                                                    <a href="{{ $image->getUrlImageAttribute() }}" data-toggle="lightbox" data-gallery="property-gallery" data-type="image">
+                                                    <img src="{{ $image->url_cropped }}" alt="">
+                                                    </a>
+                                                    <div class="property_image_actions">
+                                                        <a href="javascript:void(0)" class="btn btn-xs {{ ($image->cover == true ? 'btn-success' : 'btn-default') }} icon-notext image-set-cover px-2" data-action="{{ route('posts.imageSetCover', ['image' => $image->id]) }}"><i class="nav-icon fas fa-check"></i> </a>
+                                                        <a href="javascript:void(0)" class="btn btn-danger btn-xs image-remove px-2" data-action="{{ route('posts.imageRemove', ['image' => $image->id]) }}"><i class="nav-icon fas fa-times"></i> </a>
+                                                    </div>
                                                 </div>
-                                            </div>
                                             @endforeach
                                         </div>
                                     </div>
