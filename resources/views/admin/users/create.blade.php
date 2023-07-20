@@ -142,40 +142,7 @@
                                     
                                 </div>
 
-                                <div id="accordion">   
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h4>                          
-                                                <a style="border:none;color: #555;" data-toggle="collapse" data-parent="#accordion" href="#collapseRenda">
-                                                    <i class="nav-icon fas fa-plus mr-2"></i> Renda
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseRenda" class="panel-collapse collapse show">
-                                            <div class="card-body">
-                                                <div class="row mb-2">
-                                                    <div class="col-12 col-md-4 col-lg-4"> 
-                                                        <div class="form-group">
-                                                            <label class="labelforms text-muted"><b>Profissão:</b></label>
-                                                            <input type="text" class="form-control" placeholder="Profissão do Cliente" name="profissao" value="{{old('profissao')}}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-4 col-lg-4"> 
-                                                        <div class="form-group">
-                                                            <label class="labelforms text-muted"><b>Renda:</b></label>
-                                                            <input type="text" class="form-control mask-money" placeholder="Valores em Reais" name="renda" value="{{old('renda')}}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-4 col-lg-4"> 
-                                                        <div class="form-group">
-                                                            <label class="labelforms text-muted"><b>Empresa:</b></label>
-                                                            <input type="text" class="form-control" placeholder="Contratante" name="profissao_empresa" value="{{old('profissao_empresa')}}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div id="accordion">  
                                     <div class="card">
                                         <div class="card-header">
                                             <h4>
@@ -187,44 +154,36 @@
                                         <div id="collapseEndereco" class="panel-collapse collapse show">
                                             <div class="card-body">
                                                 <div class="row mb-2">
-                                                    <div class="col-12 col-md-4 col-lg-4"> 
+                                                    <div class="col-12 col-md-2 col-lg-2"> 
+                                                        <div class="form-group">
+                                                            <label class="labelforms text-muted"><b>CEP:</b></label>
+                                                            <input type="text" id="cep" class="form-control mask-zipcode" placeholder="Digite o CEP" name="cep" value="{{old('cep')}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-3 col-lg-3"> 
                                                         <div class="form-group">
                                                             <label class="labelforms text-muted"><b>Estado:</b></label>
-                                                            <select id="state-dd" class="form-control" name="uf">
-                                                                @if(!empty($estados))
-                                                                    @foreach($estados as $estado)
-                                                                    <option value="{{$estado->estado_id}}" {{ (old('uf') == $estado->estado_id ? 'selected' : '') }}>{{$estado->estado_nome}}</option>
-                                                                    @endforeach                                                                        
-                                                                @endif
-                                                            </select>
+                                                            <input type="text" class="form-control" id="uf" name="uf" value="{{old('uf')}}">
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-md-4 col-lg-4"> 
                                                         <div class="form-group">
                                                             <label class="labelforms text-muted"><b>Cidade:</b></label>
-                                                            <select id="city-dd" class="form-control" name="cidade">
-                                                                @if(!empty($cidades))
-                                                                    <option value="">Selecione o Estado</option>
-                                                                    @foreach($cidades as $cidade)
-                                                                        <option value="{{$cidade->cidade_id}}" 
-                                                                                {{ (old('cidade') == $cidade->cidade_id ? 'selected' : '') }}>{{$cidade->cidade_nome}}</option>                                                                   
-                                                                    @endforeach                                                                        
-                                                                @endif
-                                                            </select>
+                                                            <input type="text" class="form-control" id="cidade" name="cidade" value="{{old('cidade')}}">
                                                         </div>
                                                     </div>
-                                                    <div class="col-12 col-md-4 col-lg-4"> 
+                                                    <div class="col-12 col-md-4 col-lg-3"> 
                                                         <div class="form-group">
                                                             <label class="labelforms text-muted"><b>Bairro:</b></label>
-                                                            <input type="text" class="form-control" placeholder="Bairro" name="bairro" value="{{old('bairro')}}">
+                                                            <input type="text" class="form-control" placeholder="Bairro" id="bairro" name="bairro" value="{{old('bairro')}}">
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-2">
                                                     <div class="col-12 col-md-6 col-lg-5"> 
                                                         <div class="form-group">
-                                                            <label class="labelforms text-muted"><b>Endereço:</b></label>
-                                                            <input type="text" class="form-control" placeholder="Endereço Completo" name="rua" value="{{old('rua')}}">
+                                                            <label class="labelforms text-muted"><b>Rua/Av:</b></label>
+                                                            <input type="text" class="form-control" id="rua" name="rua" value="{{old('rua')}}">
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-md-6 col-lg-2"> 
@@ -238,13 +197,7 @@
                                                             <label class="labelforms text-muted"><b>Complemento:</b></label>
                                                             <input type="text" class="form-control" placeholder="Complemento (Opcional)" name="complemento" value="{{old('complemento')}}">
                                                         </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-2"> 
-                                                        <div class="form-group">
-                                                            <label class="labelforms text-muted"><b>CEP:</b></label>
-                                                            <input type="text" class="form-control mask-zipcode" placeholder="Digite o CEP" name="cep" value="{{old('cep')}}">
-                                                        </div>
-                                                    </div>
+                                                    </div>                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -280,8 +233,14 @@
                                                     </div>
                                                     <div class="col-12 col-md-6 col-lg-4"> 
                                                         <div class="form-group">
-                                                            <label class="labelforms text-muted"><b>E-mail Alternativo:</b></label>
-                                                            <input type="text" class="form-control" placeholder="Email Alternativo" name="email1" value="{{old('email1')}}">
+                                                            <label class="labelforms text-muted"><b>*E-mail:</b></label>
+                                                            <input type="email" class="form-control" placeholder="Melhor e-mail" name="email" value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-6 col-lg-4"> 
+                                                        <div class="form-group">
+                                                            <label class="labelforms text-muted"><b>Email Alternativo:</b></label>
+                                                            <input type="text" class="form-control" placeholder="Email Alternativo" name="email1" value="">
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-md-6 col-lg-4"> 
@@ -294,39 +253,35 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h4>
-                                                <a style="border:none;color: #555;" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                                                    <i class="nav-icon fas fa-plus mr-2"></i> Acesso
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseFour" class="panel-collapse collapse show">
-                                            <div class="card-body">
-                                                <div class="row mb-2">
-                                                    <div class="col-6 col-md-6 col-lg-6"> 
-                                                        <div class="form-group">
-                                                            <label class="labelforms text-muted"><b>*E-mail:</b></label>
-                                                            <input type="email" class="form-control" placeholder="Melhor e-mail" name="email" value="{{old('email')}}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6 col-md-6 col-lg-6"> 
-                                                        <div class="form-group">
-                                                            <label class="labelforms text-muted"><b>*Senha:</b></label>
-                                                            <div class="input-group">
-                                                                <input type="password" class="form-control" id="senha" autocomplete="off" name="password" value="{{ old('senha') }}"/>
-                                                                <div class="input-group-append" id="olho">
-                                                                    <div class="input-group-text"><i class="fa fa-eye"></i></div>
+                                    @if (\Illuminate\Support\Facades\Auth::user()->superadmin == 1)
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4>
+                                                    <a style="border:none;color: #555;" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                                                        <i class="nav-icon fas fa-plus mr-2"></i> Acesso
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseFour" class="panel-collapse collapse show">
+                                                <div class="card-body">
+                                                    <div class="row mb-2">
+                                                        
+                                                        <div class="col-6 col-md-6 col-lg-6"> 
+                                                            <div class="form-group">
+                                                                <label class="labelforms text-muted"><b>*Senha:</b></label>
+                                                                <div class="input-group">
+                                                                    <input type="password" class="form-control" id="senha" autocomplete="off" name="password" value=""/>
+                                                                    <div class="input-group-append" id="olho">
+                                                                        <div class="input-group-text"><i class="fa fa-eye"></i></div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>                                                                                                       
+                                                        </div>                                                                                                       
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-
+                                    @endif
                                 </div> 
                             </div>
 
@@ -523,28 +478,6 @@
                 }
             }
             document.getElementById("img-input").addEventListener("change", readImage, false);
-                        
-           
-            $('#state-dd').on('change', function () {
-                var idState = this.value;
-                $("#city-dd").html('');
-                $.ajax({
-                    url: "{{route('users.fetchCity')}}",
-                    type: "POST",
-                    data: {
-                        estado_id: idState,
-                        _token: '{{csrf_token()}}'
-                    },
-                    dataType: 'json',
-                    success: function (res) {
-                        $('#city-dd').html('<option value="">Selecione a cidade</option>');
-                        $.each(res.cidades, function (key, value) {
-                            $("#city-dd").append('<option value="' + value
-                                .cidade_id + '">' + value.cidade_nome + '</option>');
-                        });
-                    }
-                });
-            });
             
             // Visualizar senha no input
             var senha = $('#senha');
@@ -558,4 +491,52 @@
             
         });
     </script>
+<script>
+    $(document).ready(function() {
+
+        function limpa_formulário_cep() {
+            $("#rua").val("");
+            $("#bairro").val("");
+            $("#cidade").val("");
+            $("#uf").val("");
+        }
+        
+        $("#cep").blur(function() {
+
+            var cep = $(this).val().replace(/\D/g, '');
+
+            if (cep != "") {
+                
+                var validacep = /^[0-9]{8}$/;
+
+                if(validacep.test(cep)) {
+                    
+                    $("#rua").val("Carregando...");
+                    $("#bairro").val("Carregando...");
+                    $("#cidade").val("Carregando...");
+                    $("#uf").val("Carregando...");
+                    
+                    $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                        if (!("erro" in dados)) {
+                            $("#rua").val(dados.logradouro);
+                            $("#bairro").val(dados.bairro);
+                            $("#cidade").val(dados.localidade);
+                            $("#uf").val(dados.uf);
+                        } else {
+                            limpa_formulário_cep();
+                            alert("CEP não encontrado.");
+                        }
+                    });
+                } else {
+                    limpa_formulário_cep();
+                    alert("Formato de CEP inválido.");
+                }
+            } else {
+                limpa_formulário_cep();
+            }
+        });
+    });
+
+</script>
 @stop

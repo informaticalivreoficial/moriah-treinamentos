@@ -56,13 +56,7 @@ class UserController extends Controller
     
     public function create()
     {
-        $estados = Estados::orderBy('estado_nome', 'ASC')->get();
-        $cidades = Cidades::orderBy('cidade_nome', 'ASC')->get();        
-
-        return view('admin.users.create',[
-            'estados' => $estados,
-            'cidades' => $cidades
-        ]);
+        return view('admin.users.create');
     }
     
     public function store(UserRequest $request)
@@ -77,19 +71,17 @@ class UserController extends Controller
             $userCreate->avatar = $request->file('avatar')->storeAs(env('AWS_PASTA') . 'user', Str::slug($request->name)  . '-' . str_replace('.', '', microtime(true)) . '.' . $request->file('avatar')->extension());
             $userCreate->save();
         }
-        return redirect()->route('users.edit', $userCreate->id)->with(['color' => 'success', 'message' => 'Cadastro realizado com sucesso!']);        
+        return redirect()->route('users.edit', $userCreate->id)->with([
+            'color' => 'success', 
+            'message' => ($userCreate->client != null ? 'Aluno' : 'Usuário') . ' cadastrado com sucesso!'
+        ]);        
     }
 
     public function edit($id)
     {
         $user = User::where('id', $id)->first();    
-        $estados = Estados::orderBy('estado_nome', 'ASC')->get();
-        $cidades = Cidades::orderBy('cidade_nome', 'ASC')->get(); 
-        
         return view('admin.users.edit', [
-            'user' => $user,
-            'estados' => $estados,
-            'cidades' => $cidades
+            'user' => $user
         ]);
     }
 
@@ -102,15 +94,14 @@ class UserController extends Controller
         $user->setClientAttribute($request->client);
         $user->setSuperAdminAttribute($request->superadmin);
 
-        $nasc = Carbon::createFromFormat('d/m/Y', $request->nasc)->format('d-m-Y');        
+        // $nasc = Carbon::createFromFormat('d/m/Y', $request->nasc)->format('d-m-Y');        
         
-        if(Carbon::parse($nasc)->age < 18){
-            return redirect()->back()->with(['color' => 'danger', 'message' => 'Data de nascimento inválida!']);
-        }
+        // if(Carbon::parse($nasc)->age < 18){
+        //     return redirect()->back()->with(['color' => 'danger', 'message' => 'Data de nascimento inválida!']);
+        // }
 
         if(!empty($request->file('avatar'))){
             Storage::delete($user->avatar);
-            //Cropper::flush($user->avatar);
             $user->avatar = '';
         }
 
@@ -126,7 +117,7 @@ class UserController extends Controller
 
         return redirect()->route('users.edit', $user->id)->with([
             'color' => 'success', 
-            'message' => 'Usuário atualizado com sucesso!'
+            'message' => ($user->client != null ? 'Aluno' : 'Usuário') . ' atualizado com sucesso!'
         ]);
     }
 
@@ -159,13 +150,13 @@ class UserController extends Controller
                 $json = "<b>$nome</b> você não pode excluir um Super Administrador!";
                 return response()->json(['error' => $json,'id' => $user->id]);
             }elseif($user->admin == 1 && $user->client == 1){
-                $json = "<b>$nome</b> você tem certeza que deseja excluir este Administrador? Ele também é um Cliente";
+                $json = "<b>$nome</b> você tem certeza que deseja excluir este Administrador? Ele também é um Aluno(a)";
                 return response()->json(['error' => $json,'id' => $user->id]);
             }elseif($user->admin == 1){
                 $json = "<b>$nome</b> você tem certeza que deseja excluir um Administrador?";
                 return response()->json(['error' => $json,'id' => $user->id]);
             }elseif($user->admin == 0 && $user->client == 1){
-                $json = "<b>$nome</b> você tem certeza que deseja excluir este Cliente?";
+                $json = "<b>$nome</b> você tem certeza que deseja excluir este Aluno(a)?";
                 return response()->json(['error' => $json,'id' => $user->id]);
             }else{
                 return response()->json(['success' => true]);
@@ -177,9 +168,9 @@ class UserController extends Controller
     {
         $user = User::where('id', $request->user_id)->first();        
         if(!empty($user)){
-            $perfil = ($user->admin == '1' && $user->client == '1' ? 'Administrador e Cliente' :
+            $perfil = ($user->admin == '1' && $user->client == '1' ? 'Administrador e Aluno' :
                       ($user->admin == '1' && $user->client == '0' ? 'Administrador' :
-                      ($user->admin == '0' && $user->client == '1' ? 'Cliente' : 'Cliente')));
+                      ($user->admin == '0' && $user->client == '1' ? 'Aluno' : 'Aluno')));
             Storage::delete($user->avatar);
             //Cropper::flush($user->avatar);
             $user->delete();

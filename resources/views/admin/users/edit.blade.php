@@ -151,39 +151,6 @@
                                     <div id="accordion">   
                                         <div class="card">
                                             <div class="card-header">
-                                                <h4>                          
-                                                    <a style="border:none;color: #555;" data-toggle="collapse" data-parent="#accordion" href="#collapseRenda">
-                                                        <i class="nav-icon fas fa-plus mr-2"></i> Renda
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseRenda" class="panel-collapse collapse show">
-                                                <div class="card-body">
-                                                    <div class="row mb-2">
-                                                        <div class="col-12 col-md-4 col-lg-4"> 
-                                                            <div class="form-group">
-                                                                <label class="labelforms text-muted"><b>Profissão:</b></label>
-                                                                <input type="text" class="form-control" placeholder="Profissão do Cliente" name="profissao" value="{{old('profissao') ?? $user->profissao}}">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12 col-md-4 col-lg-4"> 
-                                                            <div class="form-group">
-                                                                <label class="labelforms text-muted"><b>Renda:</b></label>
-                                                                <input type="text" class="form-control mask-money" placeholder="Valores em Reais" name="renda" value="{{old('renda') ?? $user->renda}}">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12 col-md-4 col-lg-4"> 
-                                                            <div class="form-group">
-                                                                <label class="labelforms text-muted"><b>Empresa:</b></label>
-                                                                <input type="text" class="form-control" placeholder="Contratante" name="profissao_empresa" value="{{old('profissao_empresa') ?? $user->profissao_empresa}}">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-header">
                                                 <h4>
                                                     <a style="border:none;color: #555;" data-toggle="collapse" data-parent="#accordion" href="#collapseEndereco">
                                                         <i class="nav-icon fas fa-plus mr-2"></i> Endereço
@@ -193,42 +160,36 @@
                                             <div id="collapseEndereco" class="panel-collapse collapse show">
                                                 <div class="card-body">
                                                     <div class="row mb-2">
-                                                        <div class="col-12 col-md-4 col-lg-4"> 
+                                                        <div class="col-12 col-md-2 col-lg-2"> 
+                                                            <div class="form-group">
+                                                                <label class="labelforms text-muted"><b>CEP:</b></label>
+                                                                <input type="text" id="cep" class="form-control mask-zipcode" placeholder="Digite o CEP" name="cep" value="{{old('cep') ?? $user->cep}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-3 col-lg-3"> 
                                                             <div class="form-group">
                                                                 <label class="labelforms text-muted"><b>Estado:</b></label>
-                                                                <select id="state-dd" class="form-control" name="uf">
-                                                                    @if(!empty($estados))
-                                                                        @foreach($estados as $estado)
-                                                                        <option value="{{$estado->estado_id}}" {{ (old('uf') == $estado->estado_id ? 'selected' : ($user->uf == $estado->estado_id ? 'selected' : '')) }}>{{$estado->estado_nome}}</option>
-                                                                        @endforeach                                                                        
-                                                                    @endif
-                                                                </select>
+                                                                <input type="text" class="form-control" id="uf" name="uf" value="{{old('uf') ?? $user->uf}}">
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-4 col-lg-4"> 
                                                             <div class="form-group">
                                                                 <label class="labelforms text-muted"><b>Cidade:</b></label>
-                                                                <select id="city-dd" class="form-control" name="cidade">
-                                                                    @if(!empty($cidades) && !empty($user->cidade))
-                                                                        @foreach($cidades as $cidade)
-                                                                        <option value="{{$cidade->cidade_id}}" {{ (old('cidade') == $cidade->cidade_id ? 'selected' : ($user->cidade == $cidade->cidade_id ? 'selected' : '')) }}>{{$cidade->cidade_nome}}</option>
-                                                                        @endforeach                                                                        
-                                                                    @endif
-                                                                </select>
+                                                                <input type="text" class="form-control" id="cidade" name="cidade" value="{{old('cidade') ?? $user->cidade}}">
                                                             </div>
                                                         </div>
-                                                        <div class="col-12 col-md-4 col-lg-4"> 
+                                                        <div class="col-12 col-md-4 col-lg-3"> 
                                                             <div class="form-group">
                                                                 <label class="labelforms text-muted"><b>Bairro:</b></label>
-                                                                <input type="text" class="form-control" placeholder="Bairro" name="bairro" value="{{old('bairro') ?? $user->bairro}}">
+                                                                <input type="text" class="form-control" placeholder="Bairro" id="bairro" name="bairro" value="{{old('bairro') ?? $user->bairro}}">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row mb-2">
                                                         <div class="col-12 col-md-6 col-lg-5"> 
                                                             <div class="form-group">
-                                                                <label class="labelforms text-muted"><b>Endereço:</b></label>
-                                                                <input type="text" class="form-control" placeholder="Endereço Completo" name="rua" value="{{old('rua') ?? $user->rua}}">
+                                                                <label class="labelforms text-muted"><b>Rua/Av:</b></label>
+                                                                <input type="text" class="form-control" id="rua" name="rua" value="{{old('rua') ?? $user->rua}}">
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-6 col-lg-2"> 
@@ -241,12 +202,6 @@
                                                             <div class="form-group">
                                                                 <label class="labelforms text-muted"><b>Complemento:</b></label>
                                                                 <input type="text" class="form-control" placeholder="Complemento (Opcional)" name="complemento" value="{{old('complemento') ?? $user->complemento}}">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12 col-md-6 col-lg-2"> 
-                                                            <div class="form-group">
-                                                                <label class="labelforms text-muted"><b>CEP:</b></label>
-                                                                <input type="text" class="form-control mask-zipcode" placeholder="Digite o CEP" name="cep" value="{{old('cep') ?? $user->cep}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -284,6 +239,12 @@
                                                         </div>
                                                         <div class="col-12 col-md-6 col-lg-4"> 
                                                             <div class="form-group">
+                                                                <label class="labelforms text-muted"><b>*E-mail:</b></label>
+                                                                <input type="email" class="form-control" placeholder="Melhor e-mail" name="email" value="{{old('email') ?? $user->email}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-6 col-lg-4"> 
+                                                            <div class="form-group">
                                                                 <label class="labelforms text-muted"><b>E-mail Alternativo:</b></label>
                                                                 <input type="text" class="form-control" placeholder="Email Alternativo" name="email1" value="{{old('email1') ?? $user->email1}}">
                                                             </div>
@@ -298,38 +259,34 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h4>
-                                                    <a style="border:none;color: #555;" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                                                        <i class="nav-icon fas fa-plus mr-2"></i> Acesso
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseFour" class="panel-collapse collapse show">
-                                                <div class="card-body">
-                                                    <div class="row mb-2">
-                                                        <div class="col-6 col-md-6 col-lg-6"> 
-                                                            <div class="form-group">
-                                                                <label class="labelforms text-muted"><b>*E-mail:</b></label>
-                                                                <input type="email" class="form-control" placeholder="Melhor e-mail" name="email" value="{{old('email') ?? $user->email}}">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6 col-md-6 col-lg-6"> 
-                                                            <div class="form-group">
-                                                                <label class="labelforms text-muted"><b>*Senha:</b></label>
-                                                                <div class="input-group">
-                                                                    <input type="password" class="form-control" id="senha" name="password" value="{{ old('senha') ?? $user->senha }}"/>
-                                                                    <div class="input-group-append" id="olho">
-                                                                        <div class="input-group-text"><i class="fa fa-eye"></i></div>
+                                        @if (\Illuminate\Support\Facades\Auth::user()->superadmin == 1)
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h4>
+                                                        <a style="border:none;color: #555;" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                                                            <i class="nav-icon fas fa-plus mr-2"></i> Acesso
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapseFour" class="panel-collapse collapse show">
+                                                    <div class="card-body">
+                                                        <div class="row mb-2">
+                                                            <div class="col-6 col-md-6 col-lg-6"> 
+                                                                <div class="form-group">
+                                                                    <label class="labelforms text-muted"><b>*Senha:</b></label>
+                                                                    <div class="input-group">
+                                                                        <input type="password" class="form-control" id="senha" name="password" value="{{ old('senha') ?? $user->senha }}"/>
+                                                                        <div class="input-group-append" id="olho">
+                                                                            <div class="input-group-text"><i class="fa fa-eye"></i></div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>                                                                                                       
+                                                            </div>                                                                                                       
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endif                                        
                                     </div> 
                                 </div>
 

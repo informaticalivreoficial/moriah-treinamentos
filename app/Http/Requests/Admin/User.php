@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,7 +36,7 @@ class User extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             //'Type' => 'required|array',
             'name' => 'required|min:3|max:191',
             'nasc' => 'required|date_format:d/m/Y',
@@ -46,11 +47,19 @@ class User extends FormRequest
             
             // Access
             'email' => (!empty($this->request->all()['id']) ? 'required|email|unique:users,email,' . $this->request->all()['id'] : 'required|email|unique:users,email'),
-            'password' => (empty($this->request->all()['id']) ? 'required' : ''),
+            //'password' => (empty($this->request->all()['id']) ? 'required' : ''),
             
             // Contact
-            'celular' => 'required',                        
-            
+            'celular' => 'required' 
         ];
+
+        if (Carbon::parse($this->nasc)->age < 18)
+        {
+            $rules['responsavel_nome'] = 'required|min:3|max:191';
+            $rules['responsavel_cpf'] = 'required|min:11|max:14';
+            $rules['responsavel_telefone'] = 'required';
+        }
+
+        return $rules;
     }
 }

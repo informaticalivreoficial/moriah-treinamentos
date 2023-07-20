@@ -145,9 +145,9 @@
                                             <td class="text-center">
                                                 @if ($fatura->valor && $fatura->vencimento)
                                                     @if ($fatura->form_sendat == null)
-                                                        <a href="javascript:void(0)" class="btn btn-xs btn-success text-white j_enviaform cli{{ $fatura->id }}" data-id="{{ $fatura->id }}">Enviar Fatura <i class="fas fa-check"></i></a>
+                                                        <a href="javascript:void(0)" class="btn btn-xs btn-success text-white j_enviaform cli{{ $fatura->id }}" data-id="{{ $fatura->id }}">Enviar Fatura <i class="fas fa-envelope"></i></a>
                                                     @else
-                                                        <a href="javascript:void(0)" class="btn btn-xs btn-secondary text-white j_enviaform cli{{ $fatura->id }}" data-id="{{ $fatura->id }}">Reenviar Fatura <i class="fas fa-check"></i></a>
+                                                        <a href="javascript:void(0)" class="btn btn-xs btn-secondary text-white j_enviaform cli{{ $fatura->id }}" data-id="{{ $fatura->id }}">Reenviar Fatura <i class="fas fa-envelope"></i></a>
                                                     @endif
                                                 @else
                                                     ------------

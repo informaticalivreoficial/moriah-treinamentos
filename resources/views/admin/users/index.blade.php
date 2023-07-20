@@ -86,8 +86,8 @@
                                 </a>
                             </td>
                             <td>{{$user->name}}</td>
-                            <td>{{$user->getPlano->name}}</td>
-                            <td>{{\Carbon\Carbon::parse($user->getPlano->horario)->format('H:i')}}</td>
+                            <td>{!!($user->plano ? $user->getPlano->name : '<a href='.route('pedidos.create').'>Cadastre um Pedido</a>')!!}</td>
+                            <td>{!!($user->plano ? \Carbon\Carbon::parse($user->getPlano->horario)->format('H:i') : '<a href='.route('pedidos.create').'>Cadastre um Pedido</a>')!!}</td>
                             <td>{{$user->getFuncao()}}</td>
                             <td>
                                 <input type="checkbox" data-onstyle="success" data-offstyle="warning" data-size="mini" class="toggle-class" data-id="{{ $user->id }}" data-toggle="toggle" data-style="slow" data-on="<i class='fas fa-check'></i>" data-off="<i style='color:#fff !important;' class='fas fa-exclamation-triangle'></i>" {{ $user->status == true ? 'checked' : ''}}>
