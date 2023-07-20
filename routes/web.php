@@ -37,6 +37,7 @@ Route::group(['namespace' => 'Web', 'as' => 'web.'], function () {
 
     //Pagamentos
     Route::get('pagar/{fatura}', [PedidoController::class, 'pagar'])->name('pagar');
+    Route::post('pagar/boleto', [PedidoController::class, 'getBoleto'])->name('getBoleto');
     Route::post('notification/pagHiper', [PedidoController::class, 'getTransaction'])->name('getTransaction');
 
     //**************************** Emails ********************************************/

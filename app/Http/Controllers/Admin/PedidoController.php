@@ -10,6 +10,7 @@ use App\Models\Plano;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use WebMaster\PagHiper\PagHiper;
 
@@ -118,11 +119,11 @@ class PedidoController extends Controller
                     'item_id' => 1,
                     'description' => $fatura->pedidoObject->planoObject->name,
                     'quantity' => 1,
-                    'price_cents' => str_replace(',', '.', str_replace('.', '', $fatura->valor))
+                    'price_cents' => str_replace('.', '', $fatura->valor)
                 ]
             ]
         ];  
-        $this->gerarBoleto($data);
+        return $this->gerarBoleto($data);       
     }
 
     public function gerarBoleto($data)
@@ -137,14 +138,31 @@ class PedidoController extends Controller
             $fatura = Fatura::where('id', $transaction['order_id'])->first();
             $fatura->transaction_id = $transaction['transaction_id'];
             $fatura->status = $transaction['status'];
-            $fatura->valor = $transaction['value_cents'];
+            $fatura->valor = str_replace(',', '.', str_replace('.', '', $transaction['value_cents']));
             $fatura->url_slip = $transaction['bank_slip']['url_slip'];
             $fatura->digitable_line = $transaction['bank_slip']['digitable_line'];
             $fatura->vencimento = $transaction['due_date'];
-            $fatura->save();
-        }
+            $fatura->save(); 
+            return redirect()->away($fatura->url_slip);           
+        }  
+    }
 
-        return Redirect::to($transaction['bank_slip']['url_slip']);
-        
+    // public function getBoleto(Request $request)
+    // {
+    //     $fatura = Fatura::where('id', $request->id)->first();
+    //     $json = $fatura->url_slip;
+    //     return response()->json($json);
+    // }
+
+    public function getTransaction(Request $request)
+    {
+        $paghiper = new PagHiper(
+            env('PAGHIPER_APIKEY'), 
+            env('PAGHIPER_TOKEM')
+        );
+        $transaction = $paghiper->notification()->response(
+            $_POST['notification_id'], 
+            $_POST['idTransacao']
+        );
     }
 }

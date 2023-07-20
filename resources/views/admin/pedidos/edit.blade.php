@@ -155,9 +155,9 @@
                                             </td>
                                             <td class="text-center">{!!$fatura->getStatus()!!}</td>                       
                                             <td>
-                                                <a title="Visualizar Boleto" target="_blank" class="btn btn-success" href="{{$fatura->url_slip ?? route('web.pagar',['fatura' => $fatura->id])}}">
+                                                <a title="Visualizar Boleto" target="_blank" class="btn btn-success setBoleto" href="{{$fatura->url_slip ?? route('web.pagar',['fatura' => $fatura->id])}}">
                                                     <i class="far fa-file-alt"></i>
-                                                 </a>                                                
+                                                </a>                                                                                                
                                             </td>
                                         </tr>
                                         @endforeach
@@ -223,7 +223,11 @@
                 });
             });
 
-            
+            $('.setBoleto').click(function() {
+                setTimeout(function() {
+                    location.reload();
+                }, 3000);
+            });
         });
     </script>
 @stop
