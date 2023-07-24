@@ -16,6 +16,7 @@ class CreateContratosTable extends Migration
         Schema::create('contratos', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user');
+            $table->unsignedInteger('pedido');
             $table->integer('status')->nullable();
             
             $table->timestamps();

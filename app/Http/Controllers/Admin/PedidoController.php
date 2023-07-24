@@ -56,11 +56,10 @@ class PedidoController extends Controller
                             ($request->periodo == 3 ? $plano->valor_trimestral : 
                             ($request->periodo == 6 ? $plano->valor_semestral : 
                             ($request->periodo == 12 ? $plano->valor_anual : null))));
-                            
             $dado = [
                 'pedido'     => $criarPedido->id,
                 'user'       => $request->user,
-                'valor'      => $valor_fatura,
+                'valor'      => str_replace(',', '', str_replace('.', '', $valor_fatura)),
                 'vencimento' => date('Y-m-d', $vencimento),
                 'status'     => 'pending',
                 'created_at' => now()
@@ -74,7 +73,7 @@ class PedidoController extends Controller
                 $dados[] = [
                     'pedido'     => $criarPedido->id,
                     'user'       => $request->user,
-                    'valor'      => str_replace(',', '.', str_replace('.', '', $valor_fatura)),
+                    'valor'      => str_replace(',', '', str_replace('.', '', $valor_fatura)),
                     'vencimento' => date('Y-m-d', $vencimento),
                     'status'     => 'pending',
                     'created_at' => now()
@@ -91,10 +90,72 @@ class PedidoController extends Controller
 
     public function edit($id)
     {
+        $planos = Plano::orderBy('created_at', 'DESC')->available()->get();
+        $alunos = User::orderBy('created_at', 'DESC')->available()->where('client', '=', '1')->get();
         $pedido = Pedido::where('id', $id)->first(); 
         return view('admin.pedidos.edit', [
-            'pedido' => $pedido
+            'pedido' => $pedido,
+            'planos' => $planos,
+            'alunos' => $alunos
         ]);
+    }
+
+    public function update(PedidoRequest $request, $id)
+    {
+        $pedidoEdit = Pedido::where('id', $id)->first();
+
+        //Se o período das faturas for alterado
+        if($request->periodo != $pedidoEdit->periodo){
+            $faturas = Fatura::where('pedido', $pedidoEdit->id)
+                            ->where('vencimento', '>', now())
+                            ->get();
+            if($faturas){
+                foreach ($faturas as $fatura) {
+                    $fatura->delete();
+                }
+            }
+
+            //Se o vencimento das faturas for alterado
+            if($request->vencimento != $pedidoEdit->vencimento){
+                $vencimento = strtotime(Carbon::createFromFormat('d/m/Y',  $request->vencimento));
+            }else{
+                $vencimento = strtotime(Carbon::now()->format('d/m/Y'));
+            }
+            
+            $valor_fatura = ($request->periodo == 1 ? $pedidoEdit->planoObject->valor_mensal : 
+                            ($request->periodo == 3 ? $pedidoEdit->planoObject->valor_trimestral : 
+                            ($request->periodo == 6 ? $pedidoEdit->planoObject->valor_semestral : 
+                            ($request->periodo == 12 ? $pedidoEdit->planoObject->valor_anual : null))));
+            $dado = [
+                'pedido'     => $pedidoEdit->id,
+                'user'       => $pedidoEdit->user,
+                'valor'      => str_replace(',', '', str_replace('.', '', $valor_fatura)),
+                'vencimento' => date('Y-m-d', $vencimento),
+                'status'     => 'pending',
+                'created_at' => now()
+            ];
+
+            $criarFatura = Fatura::create($dado);
+            $criarFatura->save();
+            
+            foreach(range(2, $request->periodo) as $parcela){
+                $vencimento = strtotime('+30 days', $vencimento);
+                $dados[] = [
+                    'pedido'     => $pedidoEdit->id,
+                    'user'       => $pedidoEdit->user,
+                    'valor'      => str_replace(',', '', str_replace('.', '', $valor_fatura)),
+                    'vencimento' => date('Y-m-d', $vencimento),
+                    'status'     => 'pending',
+                    'created_at' => now()
+                ]; 
+                
+            }     
+            $criarFaturas = Fatura::insert($dados);
+        }
+
+        return Redirect::route('pedidos.edit', [
+            'id' => $pedidoEdit->id,
+        ])->with(['color' => 'success', 'message' => 'Pedido atualizado com sucesso!']);
     }
 
     public function fetchPlan(Request $request)

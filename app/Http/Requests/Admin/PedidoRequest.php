@@ -26,6 +26,7 @@ class PedidoRequest extends FormRequest
     {
         return [
             'user' => 'required',
+            'plano' => 'required',
         ];
     }
 }

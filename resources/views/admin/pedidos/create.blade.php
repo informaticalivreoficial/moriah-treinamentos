@@ -52,7 +52,7 @@
                                 <div class="col-12 col-md-6 col-lg-5"> 
                                     <div class="form-group">
                                         <label class="labelforms text-muted"><b>*Aluno</b> </label>
-                                        <select class="form-control" id="setPlan" name="user">
+                                        <select class="form-control" name="user">
                                             <option value="">Selecione o Aluno</option>
                                             @foreach($alunos as $aluno)
                                                 <option value="{{ $aluno->id }}" {{ (old('user') == $aluno->id ? 'selected' : '') }}>{{ $aluno->name }}</option>
@@ -63,9 +63,12 @@
                                 <div class="col-12 col-md-6 col-lg-5"> 
                                     <div class="form-group">
                                         <label class="labelforms text-muted"><b>*Plano</b> </label>
-                                        
-                                        <input type="hidden" id="getPlanId" name="plano" value="{{ old('plano')}}">                                        
-                                        <input type="text" class="form-control" id="getPlan" name="plan" value="{{ old('plan')}}">                                        
+                                        <select class="form-control" name="plano">
+                                            <option value="">Selecione o Plano</option>
+                                            @foreach($planos as $plano)
+                                                <option value="{{ $plano->id }}" {{ (old('plano') == $plano->id ? 'selected' : '') }}>{{ $plano->name }}</option>
+                                            @endforeach
+                                        </select>                                        
                                     </div>
                                 </div> 
                                 <div class="col-12 col-sm-4 col-md-4 col-lg-2">
@@ -151,27 +154,27 @@
                 }
             }); 
 
-            $('#setPlan').on('change', function () {
-                var idAluno = this.value;
-                $("#getPlan").html('');
-                $.ajax({
-                    url: "{{route('pedidos.fetchPlan')}}",
-                    type: "POST",
-                    data: {
-                        aluno_id: idAluno,
-                        _token: '{{csrf_token()}}'
-                    },
-                    dataType: 'json',
-                    success: function (res) {
-                        if(res.plano[0].name){
-                            $("#getPlanId").val(res.plano[0].id);
-                            $("#getPlan").val(res.plano[0].name);
-                        }else{
-                            $("#getPlan").val('Selecione primeiro um plano para o Aluno');
-                        }
-                    }
-                });
-            });
+            // $('#setPlan').on('change', function () {
+            //     var idAluno = this.value;
+            //     $("#getPlan").html('');
+            //     $.ajax({
+            //         url: "{{route('pedidos.fetchPlan')}}",
+            //         type: "POST",
+            //         data: {
+            //             aluno_id: idAluno,
+            //             _token: '{{csrf_token()}}'
+            //         },
+            //         dataType: 'json',
+            //         success: function (res) {
+            //             if(res.plano[0].name){
+            //                 $("#getPlanId").val(res.plano[0].id);
+            //                 $("#getPlan").val(res.plano[0].name);
+            //             }else{
+            //                 $("#getPlan").val('Selecione primeiro um plano para o Aluno');
+            //             }
+            //         }
+            //     });
+            // });
 
         });
     </script>

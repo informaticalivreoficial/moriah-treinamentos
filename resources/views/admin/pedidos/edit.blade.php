@@ -37,8 +37,9 @@
 </div>   
                     
             
-<form action="{{ route('pedidos.store') }}" method="post">
-    @csrf          
+<form action="{{ route('pedidos.update', ['id' => $pedido->id]) }}" method="post">
+    @csrf  
+    @method('PUT')           
     <div class="row">            
         <div class="col-12">
             <div class="card card-teal card-outline card-outline-tabs">                            
@@ -64,15 +65,21 @@
                                 <div class="col-12 col-md-6 col-lg-5"> 
                                     <div class="form-group">
                                         <label class="labelforms text-muted"><b>*Aluno</b> </label>
-                                        <input type="hidden" name="user" value="{{ old('user') ?? $pedido->userObject->id}}">                                        
-                                        <input type="text" class="form-control" value="{{ old('user') ?? $pedido->userObject->name}}" disabled>                                        
+                                        <select class="form-control" name="user" {{(auth()->user()->superadmin == null ? 'disabled' : '')}}>
+                                            @foreach($alunos as $aluno)
+                                                <option value="{{ $aluno->id }}" {{ (old('user') == $aluno->id ? 'selected' : ($aluno->id == $pedido->aluno ? 'selected' : '')) }}>{{ $aluno->name }}</option>
+                                            @endforeach
+                                        </select>                                       
                                     </div>
                                 </div> 
                                 <div class="col-12 col-md-6 col-lg-5"> 
                                     <div class="form-group">
                                         <label class="labelforms text-muted"><b>*Plano</b> </label>
-                                        <input type="hidden" id="getPlanId" name="plano" value="{{ old('plano') ?? $pedido->plano}}">                                        
-                                        <input type="text" class="form-control" id="getPlan" name="plan" value="{{ old('plan') ?? $pedido->planoObject->name}}">                                        
+                                        <select class="form-control" name="plano">                                            
+                                            @foreach($planos as $plano)
+                                                <option value="{{ $plano->id }}" {{ (old('plano') == $plano->id ? 'selected' : ($plano->id == $pedido->plano ? 'selected' : '')) }}>{{ $plano->name }}</option>
+                                            @endforeach
+                                        </select>                                        
                                     </div>
                                 </div> 
                                 <div class="col-12 col-sm-4 col-md-4 col-lg-2">
@@ -81,7 +88,7 @@
                                         <select name="periodo" class="form-control">
                                             <option value="1" {{ (old('periodo') == '1' ? 'selected' : ($pedido->periodo == 1 ? 'selected' : '')) }}>Mensal</option>
                                             <option value="3" {{ (old('periodo') == '3' ? 'selected' : ($pedido->periodo == 3 ? 'selected' : '')) }}>Trimestral</option>
-                                            <option value="6" {{ (old('periodo') == '6' ? 'selected' : ($pedido->periodo == 4 ? 'selected' : '')) }}>Semestral</option>
+                                            <option value="6" {{ (old('periodo') == '6' ? 'selected' : ($pedido->periodo == 6 ? 'selected' : '')) }}>Semestral</option>
                                             <option value="12" {{ (old('periodo') == '12' ? 'selected' : ($pedido->periodo == 12 ? 'selected' : '')) }}>Anual</option>
                                         </select>
                                     </div>
@@ -91,8 +98,8 @@
                             <div class="row mb-2">
                                 <div class="col-12 col-md-6 col-lg-3"> 
                                     <div class="form-group">
-                                        <label class="labelforms text-muted"><b>*Dia de Vencimento</b></label>
-                                        <input type="text" class="form-control" name="vencimento" value="{{ old('vencimento') ?? $pedido->vencimento}}">
+                                        <label class="labelforms text-muted"><b>*Primeiro Vencimento</b></label>
+                                        <input type="text" class="form-control datepicker-here" data-language='pt-BR' name="vencimento" value="{{ old('vencimento') ?? $pedido->vencimento}}">
                                     </div>                                                    
                                 </div>   
                                 @if (!$pedido->countfaturas() > 0)
@@ -140,7 +147,7 @@
                                         @foreach($pedido->faturas()->get() as $fatura)                    
                                         <tr>
                                             <td class="text-center">{{$fatura->id}}</td>                        
-                                            <td class="text-center">R${{$fatura->valor}}</td>                        
+                                            <td class="text-center">R$ {{ preg_replace("/^([0-9]+)*?([0-9]{2})$/", "$1,$2", $fatura->valor) }}</td>                        
                                             <td class="text-center">{{\Carbon\Carbon::parse($fatura->vencimento)->format('d/m/Y')}}</td>
                                             <td class="text-center">
                                                 @if ($fatura->valor && $fatura->vencimento)
@@ -181,10 +188,12 @@
 @stop
 
 @section('css')
-
+<link href="{{url(asset('backend/plugins/airdatepicker/css/datepicker.min.css'))}}" rel="stylesheet" type="text/css">
 @stop
 
 @section('js')
+<script src="{{url(asset('backend/plugins/airdatepicker/js/datepicker.min.js'))}}"></script>
+<script src="{{url(asset('backend/plugins/airdatepicker/js/i18n/datepicker.pt-BR.js'))}}"></script>
     <script src="{{url(asset('backend/assets/js/jquery.mask.js'))}}"></script>
     <script>
         $(document).ready(function () { 

@@ -43,7 +43,6 @@ class PlanoController extends Controller
 
     public function update(PlanoRequest $request, $id)
     {
-        //dd($request->all());
         $planoEdit = Plano::where('id', $id)->first();
         $planoEdit->fill($request->all());
 
