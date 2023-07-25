@@ -107,19 +107,19 @@ class PedidoController extends Controller
         //Se o período das faturas for alterado
         if($request->periodo != $pedidoEdit->periodo){
             $faturas = Fatura::where('pedido', $pedidoEdit->id)
-                            ->where('vencimento', '>', now())
+                            ->where('vencimento', '>=', now()->subDays(1))
                             ->get();
             if($faturas){
                 foreach ($faturas as $fatura) {
                     $fatura->delete();
                 }
             }
-
+            
             //Se o vencimento das faturas for alterado
             if($request->vencimento != $pedidoEdit->vencimento){
                 $vencimento = strtotime(Carbon::createFromFormat('d/m/Y',  $request->vencimento));
             }else{
-                $vencimento = strtotime(Carbon::now()->format('d/m/Y'));
+                $vencimento = Carbon::now()->timestamp;
             }
             
             $valor_fatura = ($request->periodo == 1 ? $pedidoEdit->planoObject->valor_mensal : 
@@ -150,8 +150,10 @@ class PedidoController extends Controller
                 ]; 
                 
             }     
-            $criarFaturas = Fatura::insert($dados);
+            $criarFaturas = Fatura::insert($dados);            
         }
+        $pedidoEdit->fill($request->all());
+        $pedidoEdit->save();
 
         return Redirect::route('pedidos.edit', [
             'id' => $pedidoEdit->id,

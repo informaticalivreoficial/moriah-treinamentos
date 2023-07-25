@@ -77,7 +77,7 @@
                                         <label class="labelforms text-muted"><b>*Plano</b> </label>
                                         <select class="form-control" name="plano">                                            
                                             @foreach($planos as $plano)
-                                                <option value="{{ $plano->id }}" {{ (old('plano') == $plano->id ? 'selected' : ($plano->id == $pedido->plano ? 'selected' : '')) }}>{{ $plano->name }}</option>
+                                                <option value="{{ $plano->id }}" {{ (old('plano') == $plano->id ? 'selected' : ($plano->id == $pedido->plano ? 'selected' : '')) }}>{{ $plano->name }} - {{$plano->horario}}</option>
                                             @endforeach
                                         </select>                                        
                                     </div>
