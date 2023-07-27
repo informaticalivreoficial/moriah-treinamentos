@@ -74,7 +74,6 @@
                         <td>{{$pedido->planoObject->name}} - {{$pedido->planoObject->horario}}</td> 
                         <td>
                             <a href="{{route('faturas.index',['pedido' => $pedido->id])}}" class="btn btn-xs btn-primary text-white"><i class="fas fa-list-alt"></i></a>
-                            <a href="{{route('pedidos.show',['id' => $pedido->id])}}" class="btn btn-xs btn-info text-white"><i class="fas fa-search"></i></a>
                             <a href="{{route('pedidos.edit',['id' => $pedido->id])}}" class="btn btn-xs btn-default"><i class="fas fa-pen"></i></a>
                             <button type="button" class="btn btn-xs btn-danger text-white j_modal_btn" data-id="{{$pedido->id}}" data-toggle="modal" data-target="#modal-default">
                                 <i class="fas fa-trash"></i>
